@@ -22,6 +22,8 @@ export const MobileMenuContainer = styled.div`
 	width: 100%;
 	position: relative;
 	overflow: auto;
+	background: #8080803b;
+	padding:10px;
 `;
 
 // Styled component for the container of the steps
@@ -83,8 +85,8 @@ const MobileMenu = () => {
 	const currentTemplateGroups = selectedStep
 		? selectedStep.templateGroups
 		: selectedGroup
-		? selectedGroup.templateGroups
-		: [];
+			? selectedGroup.templateGroups
+			: [];
 
 	const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
 		(a, b) => a.displayOrder - b.displayOrder
@@ -190,7 +192,7 @@ const MobileMenu = () => {
 
 		try {
 			if ((window as any).algho) (window as any).algho.sendUserStopForm(true);
-		} catch (e) {}
+		} catch (e) { }
 	};
 
 	const setTemplateByID = async (templateID: number) => await setTemplate(templateID);

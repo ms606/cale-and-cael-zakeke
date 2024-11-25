@@ -25,6 +25,23 @@
   color: white;
 }
 
+.select {
+  background: gray;
+  padding: 10px 7px;
+  border-end-end-radius: 5px;
+  border-end-start-radius: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.checkSvg {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -33,6 +50,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

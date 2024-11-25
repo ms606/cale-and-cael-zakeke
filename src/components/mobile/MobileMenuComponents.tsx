@@ -10,17 +10,22 @@ import noImage from '../../assets/images/no_image.png';
 // Styled component for the container of each mobile menu item
 export const MobileItemContainer = styled.div<{ selected?: boolean }>`
 	align-items: center;
-	justify-content: center;
+	justify-content: end;
 	min-width: 140px;
 	max-width: 140px;
 	width: 140px;
 	height: 140px;
-	min-height: 140px;
-	max-height: 140px;
+	min-height: 180px;
+	max-height: 1800px;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
-	border-right: 2px #fff solid;
+	border-radius: 5px;
+	/* border: 1px gray solid; */
+	background: #f7f7f7;
+
+	/* padding: 0 5px; */
+	margin:5px;
 	position: relative;
 	${(props) => props.selected && `background-color: #f7f7f7;`}
 `;
@@ -64,8 +69,8 @@ export const MenuItemImagesImageWrapper = styled.div`
 export const MenuItemLabel = styled.span`
 	font-size: 14px;
 	font-weight: 500;
-	position: absolute;
-	bottom: 20px;
+	position: relative;
+	bottom: 10px;
 	left: 0;
 	right: 0;
 	text-align: center;
@@ -137,7 +142,7 @@ const MenuItemsWrapper = styled.div`
 	min-height: 141px;
 	width: 100%;
 	overflow-x: auto;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	border-top: 1px #ffffff solid;
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
@@ -250,6 +255,13 @@ export const MobileItemsContainer: FC<MenuItemsContainerProps> = ({
 export const MenuItem: FC<MenuItemProps> = (props) => {
 	return (
 		<MobileItemContainer onClick={props.onClick} selected={props.selected}>
+			<div className="checkSvg">
+				<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
+					<path d="M25,2C12.318,2,2,12.318,2,25c0,12.683,10.318,23,23,23c12.683,0,23-10.317,23-23C48,12.318,37.683,2,25,2z M35.827,16.562	L24.316,33.525l-8.997-8.349c-0.405-0.375-0.429-1.008-0.053-1.413c0.375-0.406,1.009-0.428,1.413-0.053l7.29,6.764l10.203-15.036	c0.311-0.457,0.933-0.575,1.389-0.266C36.019,15.482,36.138,16.104,35.827,16.562z"></path>
+				</svg>
+			</div>
+			{!props.hideLabel && <MenuItemLabel>{props.label}</MenuItemLabel>}
+
 			{props.description && props.description.length !== 0 && (
 				<Tooltip optionDescription={props.description} $isMobile />
 			)}
@@ -257,6 +269,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 				<MenuItemImage isRound={props.isRound} src={props.imageUrl} alt={props.label} loading='lazy' />
 			)}
 			{!props.imageUrl && props.icon && <MenuItemIcon>{props.icon}</MenuItemIcon>}
+
 			{props.images && (
 				<MenuItemImagesWrapper>
 					{[0, 0, 0, 0].map((_, index) => (
@@ -273,7 +286,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 					))}
 				</MenuItemImagesWrapper>
 			)}
-			{!props.hideLabel && <MenuItemLabel>{props.label}</MenuItemLabel>}
+			<div className="select">Select Options</div>
 		</MobileItemContainer>
 	);
 };
