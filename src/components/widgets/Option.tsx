@@ -3,15 +3,19 @@ import { FC } from "react";
 import styled from "styled-components";
 import { Option, useZakeke, Attribute } from '@zakeke/zakeke-configurator-react';
 import Tooltip from "./tooltip";
+import { ReactComponent as TickButton } from '../../assets/icons/tick-button.svg';
 
 const OptionContainer = styled.div<{ optionShape: number, selected: boolean, hasDescriptionIcon: boolean }>`
+    border: 1px solid lightgray;
+    border-radius: 3%;
+    background-color: white;
     display:flex;
     flex-flow:column;
     justify-content:center;
     align-items:center;
     cursor:pointer;
     position:relative;
-    padding: ${props => props.hasDescriptionIcon ? '26px' : '10px'} 0px 10px 0;
+    padding: ${props => props.hasDescriptionIcon ? '26px' : '10px'} 0px 0px 0;
     user-select: none;
     width: 100%;
     min-width: 0;
@@ -25,11 +29,45 @@ const OptionContainer = styled.div<{ optionShape: number, selected: boolean, has
     `}
 `;
 
+const OptionSelectionDiv = styled.div`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  width: 100%;
+  padding-right: 10px;
+`;
+
+const OptionColorTitleDiv = styled.div`
+  display: flex;
+  justify-content: left;
+  padding: 10px 0px;
+  font-size: 13px;
+  font-weight: 500;
+`;
+
+
+const OptionSelectDiv = styled.div`
+width: 100%;
+background-color: #bab8b8;
+color: black;
+font-size: 14px;
+text-align: center;
+display: flex;
+justify-content: center;
+padding: 3px;
+height: 2em;
+align-items: center;
+font-weight: 500;
+`;
+
 const OptionIconContainerStyled = styled.div`
    overflow: hidden;
    width: 100%;
-   aspect-ratio: 1;
+//    aspect-ratio: 1;
    padding: 0 10px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 `;
 
 const OptionIconContainer: FC<{
@@ -51,10 +89,18 @@ const OptionIcon = styled.img<{ optionShape?: boolean }>`
 `;
 
 const OptionName = styled.span`
-    font-size:12px;
-    margin-top: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: 7px;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
     text-align:center;
     overflow:hidden;
+
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    width: 100%;
 
     @media (max-width: 1025px) {
         font-size:10px;
@@ -69,8 +115,11 @@ const OptionName = styled.span`
 `;
 
 const OptIconContainer = styled.div`
-    width: 100%;
+    width: 46%;
     aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const OptionItem: FC<{ selectedAttribute: Attribute | null | undefined, option: Option, hasDescriptionIcon: boolean }> = ({ selectedAttribute, option, hasDescriptionIcon }) => {
@@ -101,7 +150,8 @@ const OptionItem: FC<{ selectedAttribute: Attribute | null | undefined, option: 
         selected={option.selected}
         optionShape={option.attribute.optionShapeType}
         onClick={() => handleOptionSelection(option)}>
-
+        <OptionSelectionDiv> <TickButton /> </OptionSelectionDiv>
+        <OptionColorTitleDiv>COLOR</OptionColorTitleDiv>
         <OptionIconContainer>
             {option.description && option.description.length !== 0 &&
                 <Tooltip key={"tooltip" + option.guid} optionDescription={option.description} />
@@ -112,6 +162,7 @@ const OptionItem: FC<{ selectedAttribute: Attribute | null | undefined, option: 
         </OptionIconContainer>
 
         {!option.attribute.hideOptionsLabel && <OptionName >{T._d(option.name)}</OptionName>}
+        <OptionSelectDiv> SELECT </OptionSelectDiv>
     </OptionContainer>;
 }
 

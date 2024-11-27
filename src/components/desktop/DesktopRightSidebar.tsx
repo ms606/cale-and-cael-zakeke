@@ -1,6 +1,8 @@
 import { Attribute, Step, ThemeTemplateGroup } from '@zakeke/zakeke-configurator-react';
 import { ReactComponent as AngleLeftSolid } from '../../assets/icons/angle-left-solid.svg';
 import { ReactComponent as AngleRightSolid } from '../../assets/icons/angle-right-solid.svg';
+import { ReactComponent as TickButton } from '../../assets/icons/tick-button.svg';
+
 import textIcon from '../../assets/icons/font-solid.svg';
 import savedCompositionsIcon from '../../assets/icons/saved_designs.svg';
 import star from '../../assets/icons/star.svg';
@@ -39,8 +41,9 @@ import TemplateGroup from 'components/TemplateGroup';
 
 export const DesktopRightSidebarContainer = styled.div`
 	display: flex;
-	flex-flow: row;
-	justify-content: flex-end;
+	flex-direction: column;
+	// flex-flow: row;
+	justify-content: flex-start;
 	min-height: 0;
 
 	@media (max-width: 1024px) {
@@ -60,6 +63,51 @@ const SliderArrow = styled<React.FC<React.ComponentProps<typeof Icon> & { arrowD
 	${(props) => props.arrowDirection === 'left' && `left: -28px`}
 	${(props) => props.arrowDirection === 'right' && `right: -28px`}
 `;
+
+const GroupIconViewOptions = styled.div`
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	width: 100%;
+	background-color: #c7c7c7;
+	height: 3em;
+	justify-content: center;
+	align-itemcs: center;
+	text-align: center;
+	display: flex;
+	padding: 10px 0px;
+`;
+
+const GroupNameTitle = styled.div`
+	padding-top: 10px;
+	font-size: 16px !important;
+	font-weight: 500;
+`;
+
+const OptionSelectionDiv = styled.div`
+	padding-top: 10px;
+	display: flex;
+	justify-content: right;
+	align-items: center;
+	width: 100%;
+	padding-right: 10px;
+`;
+
+const ApplyButton = styled.div`
+	border: 1px solid;
+	box-shadow: 3px 3px;
+	width: 121px;
+	padding: 8px;
+	display: flex;
+	justify-content: center;
+	align-item: center;
+	text-align: center;
+	cursor: pointer;
+	position: absolute;
+    bottom: 5em;
+    right: 16px;
+`;
+
 
 // This is the right sidebar component for the desktop layout
 // that contains the list of groups, steps, attributes and options.
@@ -89,6 +137,8 @@ const DesktopRightSidebar = () => {
 	const [lastSelectedItemsFromSteps, setLastSelectedItemFromSteps] = useState(Map<number, [number, string]>());
 
 	const actualGroups = useActualGroups();
+	console.log(actualGroups, 'actualGroups');
+
 	const selectedGroup = selectedGroupId ? actualGroups.find((group) => group.id === selectedGroupId) : null;
 	const selectedStep = selectedGroupId
 		? actualGroups.find((group) => group.id === selectedGroupId)?.steps.find((step) => step.id === selectedStepId)
@@ -110,6 +160,8 @@ const DesktopRightSidebar = () => {
 	const selectedTemplateGroup = currentTemplateGroups
 		? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
 		: null;
+
+	const [visibleClickType, setVisibleClickType] = useState<string>('Group');
 
 	// const [lastSelectedItem, setLastSelectedItem] = useState<{ type: string; id: number }>();
 
@@ -160,6 +212,7 @@ const DesktopRightSidebar = () => {
 			});
 		}
 		setSelectedGroupId(groupId);
+		// setVisibleClickType('Option');
 	};
 
 	const handleStepSelection = (stepId: number | null) => {
@@ -408,39 +461,55 @@ const DesktopRightSidebar = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isStartRegistering]);
 
+	console.log(visibleClickType, 'visibleClickType');
+
 	return (
 		<DesktopRightSidebarContainer>
-			<GroupsContainer>
-				{actualGroups &&
-					!(actualGroups.length === 1 && actualGroups[0].name.toLowerCase() === 'other') &&
-					actualGroups.map((group) => {
-						if (group)
-							return (
-								<GroupItem
-									key={group.guid}
-									className={'group-item' + (group.id === selectedGroupId ? ' selected' : '')}
-									onClick={() => handleGroupSelection(group.id)}
-								>
-									<GroupIcon
-										loading='lazy'
-										// fetchpriority="low"
-										src={
-											group.imageUrl && group.imageUrl !== ''
-												? group.id === -3
-													? savedCompositionsIcon
-													: group.imageUrl
-												: group.id === -2
-												? textIcon
-												: star
-										}
-									/>
-									<span>{group.name ? T._d(group.name) : T._('Customize', 'Composer')}</span>
-								</GroupItem>
-							);
-						else return null;
-					})}
-			</GroupsContainer>
-			<AttributesContainer key={selectedAttributeId}>
+			{visibleClickType === 'Group' && (
+				<GroupsContainer>
+					{actualGroups &&
+						!(actualGroups.length === 1 && actualGroups[0].name.toLowerCase() === 'other') &&
+						actualGroups.map((group) => {
+							if (group)
+								return (
+									<GroupItem
+										key={group.guid}
+										className={'group-item' + (group.id === selectedGroupId ? ' selected' : '')}
+										onClick={() => {
+											handleGroupSelection(group.id);
+											setVisibleClickType('Option');
+										}}
+									>
+										<OptionSelectionDiv>
+											{' '}
+											<TickButton />{' '}
+										</OptionSelectionDiv>
+
+										<GroupNameTitle>
+											<>{group.name ? T._d(group.name) : T._('Customize', 'Composer')}</>
+										</GroupNameTitle>
+
+										<GroupIcon
+											loading='lazy'
+											// fetchpriority="low"
+											src={
+												group.imageUrl && group.imageUrl !== ''
+													? group.id === -3
+														? savedCompositionsIcon
+														: group.imageUrl
+													: group.id === -2
+													? textIcon
+													: star
+											}
+										/>
+										<GroupIconViewOptions>VIEW OPTIONS</GroupIconViewOptions>
+									</GroupItem>
+								);
+							else return null;
+						})}
+				</GroupsContainer>
+			)}
+			{visibleClickType === 'Option' && <AttributesContainer key={selectedAttributeId}>
 				{/* Steps */}
 				{selectedGroup && selectedGroupId !== -2 && selectedGroup.steps && selectedGroup.steps.length > 0 && (
 					<Steps
@@ -488,9 +557,12 @@ const DesktopRightSidebar = () => {
 											if (!(item instanceof ThemeTemplateGroup))
 												return (
 													<ItemContainer
+														onClick={() => {
+															setVisibleClickType('Group');
+															handleAttributeSelection(item.id);
+														}}
 														selected={item.id === lastSelectedItem?.id}
 														key={item.guid}
-														onClick={() => handleAttributeSelection(item.id)}
 													>
 														<ItemName key={item.name}>
 															{' '}
@@ -522,7 +594,10 @@ const DesktopRightSidebar = () => {
 
 								{lastSelectedItem?.type === 'attribute' ? (
 									<>
-										<OptionsContainer key={'options-container'}>
+										<OptionsContainer
+											key={'options-container'}
+											onClick={() => setVisibleClickType('Group')}
+										>
 											<Options key={'option'}>
 												{selectedAttribute &&
 													selectedAttribute.options
@@ -552,7 +627,8 @@ const DesktopRightSidebar = () => {
 
 						{selectedGroup?.direction === 1 && (
 							<>
-								{currentItems &&
+								{visibleClickType === 'Option' &&
+									currentItems &&
 									currentItems.map((item) => {
 										if (!(item instanceof ThemeTemplateGroup))
 											return (
@@ -583,9 +659,10 @@ const DesktopRightSidebar = () => {
 														</ItemAccordionDescription>
 													)}
 
-													{attributesOpened.get(item.id) && (
-														<OptionsContainer>
-															<Options>
+													{/* Enable Disable this component for visibilty */}
+													{visibleClickType == 'Option' && attributesOpened.get(item.id) && (
+														<OptionsContainer onClick={() => setVisibleClickType('Group')}>
+															<Options onClick={() => setVisibleClickType('Group')}>
 																{item.options
 																	.filter((x) => x.enabled)
 																	.map((option) => (
@@ -644,11 +721,16 @@ const DesktopRightSidebar = () => {
 				)}
 
 				{/* Designer / Customizer */}
-				{selectedGroupId === -2 && <Designer />}
+				{selectedGroupId === -2 && (
+					<>
+						<Designer />
+						<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
+					</>
+				)}
 
 				{/* Saved Compositions */}
 				{draftCompositions && selectedGroupId === -3 && <DesignsDraftList />}
-			</AttributesContainer>
+			</AttributesContainer>}
 		</DesktopRightSidebarContainer>
 	);
 };
