@@ -108,6 +108,23 @@ const ApplyButton = styled.div`
     right: 16px;
 `;
 
+const OptionApplyButton = styled.div`
+	border: 1px solid;
+	box-shadow: 3px 3px;
+	width: 121px;
+	padding: 8px;
+	display: flex;
+	justify-content: center;
+	align-item: center;
+	text-align: center;
+	cursor: pointer;
+	margin-left: auto;
+	margin-rigt: 10px;
+	// position: absolute;
+    // bottom: 5em;
+    // right: 16px;
+`;
+
 
 // This is the right sidebar component for the desktop layout
 // that contains the list of groups, steps, attributes and options.
@@ -573,6 +590,7 @@ const DesktopRightSidebar = () => {
 																? T._d(item.options.find((opt) => opt.selected)!.name)
 																: ''}
 														</OptionSelectedName>
+														<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
 													</ItemContainer>
 												);
 											else
@@ -594,6 +612,7 @@ const DesktopRightSidebar = () => {
 
 								{lastSelectedItem?.type === 'attribute' ? (
 									<>
+									wwqweqewqew
 										<OptionsContainer
 											key={'options-container'}
 											onClick={() => setVisibleClickType('Group')}
@@ -614,6 +633,8 @@ const DesktopRightSidebar = () => {
 														))}
 											</Options>
 										</OptionsContainer>
+										sdfdsfds
+										<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
 										<AttributeDescription>{selectedAttribute?.description}</AttributeDescription>
 									</>
 								) : (
@@ -660,9 +681,13 @@ const DesktopRightSidebar = () => {
 													)}
 
 													{/* Enable Disable this component for visibilty */}
+													
 													{visibleClickType == 'Option' && attributesOpened.get(item.id) && (
-														<OptionsContainer onClick={() => setVisibleClickType('Group')}>
-															<Options onClick={() => setVisibleClickType('Group')}>
+														<>
+														<OptionsContainer //onClick={() => setVisibleClickType('Group')}
+														>
+															<Options //onClick={() => setVisibleClickType('Group')}
+															>
 																{item.options
 																	.filter((x) => x.enabled)
 																	.map((option) => (
@@ -677,6 +702,9 @@ const DesktopRightSidebar = () => {
 																	))}
 															</Options>
 														</OptionsContainer>
+														<OptionApplyButton onClick={() => setVisibleClickType('Group')}>Apply</OptionApplyButton>
+														</>
+														
 													)}
 												</ItemAccordionContainer>
 											);
