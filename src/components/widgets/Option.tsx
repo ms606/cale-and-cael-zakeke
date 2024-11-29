@@ -21,9 +21,9 @@ const OptionContainer = styled.div<{ optionShape: number, selected: boolean, has
     min-width: 0;
 
     &:hover {
-        background-color: #f5f6f7;
+       background-color: #f5f6f7;
     }
-    
+
     ${props => props.selected && `
         background-color: #f5f6f7;
     `}
@@ -58,6 +58,14 @@ padding: 3px;
 height: 2em;
 align-items: center;
 font-weight: 500;
+
+
+&:hover {
+    background-color: #67e008;
+    color: #fff;
+    font-weight: 600;
+}
+
 `;
 
 const OptionIconContainerStyled = styled.div`
@@ -150,7 +158,8 @@ const OptionItem: FC<{ selectedAttribute: Attribute | null | undefined, option: 
         selected={option.selected}
         optionShape={option.attribute.optionShapeType}
         onClick={() => handleOptionSelection(option)}>
-        <OptionSelectionDiv> <TickButton /> </OptionSelectionDiv>
+
+        {option.selected && <OptionSelectionDiv> <TickButton /> </OptionSelectionDiv>}
         <OptionColorTitleDiv>COLOR</OptionColorTitleDiv>
         <OptionIconContainer>
             {option.description && option.description.length !== 0 &&

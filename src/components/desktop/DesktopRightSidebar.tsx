@@ -72,16 +72,22 @@ const GroupIconViewOptions = styled.div`
 	background-color: #c7c7c7;
 	height: 3em;
 	justify-content: center;
-	align-itemcs: center;
+	// align-itemcs: center;
 	text-align: center;
 	display: flex;
 	padding: 10px 0px;
+
+	&:hover {
+		background-color: #67e008;
+		color: #fff;
+	}
 `;
 
 const GroupNameTitle = styled.div`
 	padding-top: 10px;
 	font-size: 16px !important;
 	font-weight: 500;
+	}
 `;
 
 const OptionSelectionDiv = styled.div`
@@ -478,8 +484,6 @@ const DesktopRightSidebar = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isStartRegistering]);
 
-	console.log(visibleClickType, 'visibleClickType');
-
 	return (
 		<DesktopRightSidebarContainer>
 			{visibleClickType === 'Group' && (
@@ -499,7 +503,7 @@ const DesktopRightSidebar = () => {
 									>
 										<OptionSelectionDiv>
 											{' '}
-											<TickButton />{' '}
+											{/* <TickButton />{' '} */}
 										</OptionSelectionDiv>
 
 										<GroupNameTitle>
@@ -519,7 +523,7 @@ const DesktopRightSidebar = () => {
 													: star
 											}
 										/>
-										<GroupIconViewOptions>VIEW OPTIONS</GroupIconViewOptions>
+										<GroupIconViewOptions className='GroupIconViewOptions'>VIEW OPTIONS</GroupIconViewOptions>
 									</GroupItem>
 								);
 							else return null;
@@ -633,7 +637,7 @@ const DesktopRightSidebar = () => {
 														))}
 											</Options>
 										</OptionsContainer>
-										sdfdsfds
+										
 										<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
 										<AttributeDescription>{selectedAttribute?.description}</AttributeDescription>
 									</>

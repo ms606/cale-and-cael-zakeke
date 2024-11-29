@@ -47,8 +47,14 @@ export const GroupItem = styled.div`
 	cursor: pointer;
 	// padding: 0px 10px 0px 10px;
 	text-transform: uppercase;
+	
 	&:hover {
 		background-color: white;
+
+		.GroupIconViewOptions {
+			background-color: #67e008;
+			color: #fff;
+		}
 	}
 
 	&.selected {
