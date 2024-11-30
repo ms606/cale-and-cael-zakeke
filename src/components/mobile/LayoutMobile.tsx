@@ -49,6 +49,7 @@ export const Top = styled.div`
 function LayoutMobile() {
   return (
     <MobileContainer>
+
       <Viewer3D /> {/* Renders the 3D viewer */}
       <MobileMenu /> {/* Renders the mobile menu */}
       <FooterMobile /> {/* Renders the mobile footer */}

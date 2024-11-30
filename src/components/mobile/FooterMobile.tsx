@@ -79,6 +79,60 @@ const FooterMobileIcon = styled.div<{
 	${(props) => props.gridArea && `grid-area:${props.gridArea}`};
 `;
 
+
+const FooterMobileIcon2 = styled.div<{
+	isHidden?: boolean;
+	color?: string;
+	backgroundColor?: string;
+	iconColor?: string;
+	isCart?: boolean;
+	disabled?: boolean;
+	gridArea?: string;
+}>`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px transparent solid;
+	color: ${(props) => (props.color ? props.color : `white`)};
+	background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : `transparent`)};
+
+	font-size: 12px;
+	padding:10px 40px;
+	text-transform: uppercase;
+	text-align: center;
+	display: inline-flex;
+	min-height: 38px;
+	border: none;
+	border-right: 3px #f4f4f4 solid;
+	cursor: pointer;
+	flex-direction: column;
+	font-weight: medium !important;
+
+	svg {
+		fill: ${(props) => props.iconColor && `${props.iconColor}`};
+		width: 32px;
+		height: 32px;
+	}
+
+	${(props) => props.isHidden && `visibility:hidden`};
+
+	${(props) =>
+		props.isCart &&
+		`
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;`};
+
+	${(props) =>
+		props.disabled &&
+		`
+      background-color: lightgray;
+      border: 1px solid gray;
+      color: #313c46;
+  `}
+	${(props) => props.gridArea && `grid-area:${props.gridArea}`};
+`;
 const FooterMobile = () => {
 	const [openOutOfStockTooltip, , isOutOfStockTooltipVisible, Dropdown] = useDropdown();
 	const addToCartButtonRef = useRef<HTMLDivElement>(null);
@@ -334,17 +388,45 @@ const FooterMobile = () => {
 		<>
 			{!isSceneLoading && (
 				<FooterMobileContainer isQuoteEnable={product?.quoteRule !== null}>
-					<FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
-						<AngleLeftSolid />
-					</FooterMobileIcon>
+					<div
+						style={{
+							display: 'flex',
+							gap: "20px",
+							alignItems: "center",
 
-					{
+						}}
+					>
+						<FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
+							<AngleLeftSolid />
+						</FooterMobileIcon>
+
+						<div
+							style={{
+								fontSize: "18px",
+								fontWeight: "semibold",
+								color: "#000", // Base text color
+								marginTop: "20px",
+
+							}}
+						>
+							Total:
+							<span style={{ fontWeight: "bold" }}>
+								{(!sellerSettings || !sellerSettings.hidePrice) && (
+									<PriceContainer style={{ fontSize: '18px' }} $isMobile={isMobile}>
+										{priceFormatter.format(price)}
+									</PriceContainer>
+								)}
+							</span>
+						</div>
+					</div>
+
+					{/* {
 						<FooterMobileIcon gridArea='pdf' onClick={handlePdfClick}>
 							<PdfSolid />
 						</FooterMobileIcon>
-					}
+					} */}
 
-					{!isDraftEditor &&
+					{/* {!isDraftEditor &&
 						!isEditorMode &&
 						!isViewerMode &&
 						sellerSettings &&
@@ -358,40 +440,40 @@ const FooterMobile = () => {
 						<FooterMobileIcon gridArea='share' onClick={handleShareClick}>
 							<ShareSolid />
 						</FooterMobileIcon>
-					)}
+					)} */}
 
-					{isBuyVisibleForQuoteRule && !isViewerMode && (
-						<FooterMobileIcon
-							gridArea='cart'
-							isCart
-							iconColor='white'
-							color='white'
-							ref={addToCartButtonRef}
-							onPointerEnter={() => {
-								if (isOutOfStock) openOutOfStockTooltip(addToCartButtonRef.current!, 'top', 'top');
-							}}
-							disabled={disableButtonsByVisibleMessages || isAddToCartLoading || isOutOfStock}
-							backgroundColor='#313c46'
-							onClick={!isAddToCartLoading ? () => handleAddToCart() : () => null}
-						>
-							{!isOutOfStock &&
+					{/* {isBuyVisibleForQuoteRule && !isViewerMode && ( */}
+					<FooterMobileIcon2
+						gridArea='cart'
+						isCart
+						iconColor='white'
+						color='white'
+						ref={addToCartButtonRef}
+						onPointerEnter={() => {
+							if (isOutOfStock) openOutOfStockTooltip(addToCartButtonRef.current!, 'top', 'top');
+						}}
+						disabled={disableButtonsByVisibleMessages || isAddToCartLoading || isOutOfStock}
+						backgroundColor='#000'
+						onClick={!isAddToCartLoading ? () => handleAddToCart() : () => null}
+					>
+						{/* {!isOutOfStock &&
 								price !== null &&
 								price > 0 &&
 								(!sellerSettings || !sellerSettings.hidePrice) && (
 									<PriceContainer style={{ fontSize: '18px' }} $isMobile={isMobile}>
 										{priceFormatter.format(price)}
 									</PriceContainer>
-								)}
+								)} */}
+						Review & Buy
+						{isOutOfStock && T._('OUT OF STOCK', 'Composer')}
 
-							{isOutOfStock && T._('OUT OF STOCK', 'Composer')}
-
-							{!isOutOfStock &&
+						{/* {!isOutOfStock &&
 								!isAddToCartLoading &&
-								(isDraftEditor || isEditorMode ? <SaveSolid /> : <CartSolid />)}
-							{isAddToCartLoading && <TailSpin color='#FFFFFF' height='25px' />}
-						</FooterMobileIcon>
-					)}
-					{product?.quoteRule && !isViewerMode && !isDraftEditor && !isEditorMode && (
+								(isDraftEditor || isEditorMode ? <SaveSolid /> : <CartSolid />)} */}
+						{isAddToCartLoading && <TailSpin color='#FFFFFF' height='25px' />}
+					</FooterMobileIcon2>
+					{/* )} */}
+					{/* {product?.quoteRule && !isViewerMode && !isDraftEditor && !isEditorMode && (
 						<FooterMobileIcon
 							gridArea='quote'
 							iconColor='white'
@@ -409,7 +491,7 @@ const FooterMobile = () => {
 							)}
 							{isQuoteLoading && <TailSpin color='#FFFFFF' height='25px' />}
 						</FooterMobileIcon>
-					)}
+					)} */}
 				</FooterMobileContainer>
 			)}
 

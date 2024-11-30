@@ -13,6 +13,7 @@ import { ItemName, Template, TemplatesContainer } from '../layout/SharedComponen
 import Steps from '../layout/Steps';
 import { MenuItem, MobileItemsContainer } from './MobileMenuComponents';
 import TemplateGroup from 'components/TemplateGroup';
+import textIcon from '../../assets/icons/font-solid.svg';
 
 // Styled component for the container of the mobile menu
 export const MobileMenuContainer = styled.div`
@@ -319,8 +320,16 @@ const MobileMenu = () => {
 							return (
 								<MenuItem
 									key={group.guid}
+									group={true}
 									imageUrl={
-										group.id === -3 ? savedCompositionsIcon : group.imageUrl ? group.imageUrl : star
+										group.imageUrl && group.imageUrl !== ''
+											? group.id === -3
+												? savedCompositionsIcon
+												: group.imageUrl
+											: group.id === -2
+												? textIcon
+												: star
+										// group.id === -3 ? savedCompositionsIcon : group.imageUrl ? group.imageUrl : star
 									}
 									label={group.name ? T._d(group.name) : T._('Customize', 'Composer')}
 									onClick={() => handleGroupSelection(group.id)}
@@ -364,6 +373,8 @@ const MobileMenu = () => {
 							if (!(item instanceof ThemeTemplateGroup))
 								return (
 									<MenuItem
+										group={false}
+
 										selected={item.id === selectedAttributeId}
 										key={item.guid}
 										onClick={() => handleAttributeSelection(item.id)}
@@ -379,6 +390,8 @@ const MobileMenu = () => {
 							else
 								return (
 									<MenuItem
+										group={false}
+
 										selected={item.templateGroupID === selectedTemplateGroupId}
 										key={item.templateGroupID}
 										onClick={() => handleTemplateGroupSelection(item.templateGroupID)}

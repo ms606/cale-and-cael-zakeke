@@ -28,6 +28,8 @@ import { ReactComponent as SearchPlusSolid } from '../assets/icons/search-plus-s
 import { ReactComponent as UndoSolid } from '../assets/icons/undo-solid.svg';
 import { Dialog, useDialogManager } from './dialogs/Dialogs';
 import Notifications from './widgets/Notifications';
+import logo from '../assets/MAIN_LOGO.png';
+
 import {
 	AiIcon,
 	ArIcon,
@@ -191,6 +193,28 @@ const Viewer3D = () => {
 
 	return (
 		<ViewerContainer ref={ref}>
+			<div
+				style={{
+					position: "fixed",
+					top: "10px",
+					left: "0px",
+					display: window.innerWidth <= 768 ? "flex" : "none", // Conditional inline styling
+					justifyContent: "center",
+					alignItems: "center",
+					zIndex: 9999,
+					width: "100%", // Full width for mobile
+				}}
+			>
+				<img
+					src={logo}
+					alt=""
+					style={{
+						margin: "0 auto",
+						width: "200px",
+					}}
+				/>
+			</div>
+
 			{!isSceneLoading && <ZakekeViewer bgColor='#f2f2f2' />}
 
 			{!isInfoPointContentVisible && (

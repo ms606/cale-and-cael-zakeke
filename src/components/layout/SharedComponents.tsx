@@ -220,7 +220,7 @@ export const ViewerContainer = styled.div`
 	}
 `;
 
-export const ZoomInIcon = styled(Icon)<{ $isMobile?: boolean }>`
+export const ZoomInIcon = styled(Icon) <{ $isMobile?: boolean }>`
 	position: absolute;
 	left: 20px;
 	width: 32px;
@@ -237,7 +237,7 @@ export const ZoomInIcon = styled(Icon)<{ $isMobile?: boolean }>`
 	}
 `;
 
-export const ZoomOutIcon = styled(Icon)<{ $isMobile?: boolean }>`
+export const ZoomOutIcon = styled(Icon) <{ $isMobile?: boolean }>`
 	position: absolute;
 	left: 20px;
 	width: 32px;
@@ -254,7 +254,7 @@ export const ZoomOutIcon = styled(Icon)<{ $isMobile?: boolean }>`
 	}
 `;
 
-export const ResetIcon = styled(Icon)<{ $isMobile?: boolean }>`
+export const ResetIcon = styled(Icon) <{ $isMobile?: boolean }>`
 	position: absolute;
 	left: 20px;
 	width: 27px;
@@ -272,7 +272,7 @@ export const ResetIcon = styled(Icon)<{ $isMobile?: boolean }>`
 	}
 `;
 
-export const UndoIcon = styled(Icon)<{ $isMobile?: boolean }>`
+export const UndoIcon = styled(Icon) <{ $isMobile?: boolean }>`
 	position: absolute;
 	left: 20px;
 	width: 27px;
@@ -290,7 +290,7 @@ export const UndoIcon = styled(Icon)<{ $isMobile?: boolean }>`
 	}
 `;
 
-export const RedoIcon = styled(Icon)<{ $isMobile?: boolean }>`
+export const RedoIcon = styled(Icon) <{ $isMobile?: boolean }>`
 	position: absolute;
 	left: 20px;
 	width: 27px;
@@ -382,7 +382,7 @@ export const ArIcon = styled(ArSolid)`
 	}
 `;
 
-export const AiIcon = styled(AISolid)<{ $isArIconVisible?: boolean }>`
+export const AiIcon = styled(AISolid) <{ $isArIconVisible?: boolean }>`
 	width: 32px;
 	height: 32px;
 	cursor: pointer;
@@ -517,15 +517,30 @@ export const QuantityContainer = styled.div`
 	} */
 `;
 
+// export const FooterMobileContainer = styled.div<{ isQuoteEnable?: boolean }>`
+// 	height: 50px;
+// 	display: grid;
+// 	grid-template-columns: repeat(5, 1fr);
+// 	background-color: #fff;
+// 	font-size: 12px;
+// 	margin-top: 4px;
+// 	border-top: 1px #fff solid;
+// 	grid-template-areas: 'back pdf save share cart';
+// 	${(props) =>
+// 		props.isQuoteEnable &&
+// 		`
+// 	grid-template-columns: repeat(6, 1fr);
+// 	grid-template-areas: 'back pdf save share cart quote' 
+// 	`};
+// `;
 export const FooterMobileContainer = styled.div<{ isQuoteEnable?: boolean }>`
-	height: 70px;
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+	height: 50px;
+	display: flex;
 	background-color: #fff;
+	justify-content: space-between;
 	font-size: 12px;
-	margin-top: 4px;
+	align-items: center;
 	border-top: 1px #fff solid;
-	grid-template-areas: 'back pdf save share cart';
 	${(props) =>
 		props.isQuoteEnable &&
 		`

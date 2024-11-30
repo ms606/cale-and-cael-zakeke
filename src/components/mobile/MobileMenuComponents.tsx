@@ -11,9 +11,9 @@ import noImage from '../../assets/images/no_image.png';
 export const MobileItemContainer = styled.div<{ selected?: boolean }>`
 	align-items: center;
 	justify-content: end;
-	min-width: 140px;
-	max-width: 140px;
-	width: 140px;
+	min-width: 130px;
+	max-width: 130px;
+	width: 130px;
 	height: 140px;
 	min-height: 180px;
 	max-height: 1800px;
@@ -25,7 +25,8 @@ export const MobileItemContainer = styled.div<{ selected?: boolean }>`
 	background: #f7f7f7;
 
 	/* padding: 0 5px; */
-	margin:5px;
+	margin:5px 10px 5px 10px;
+	
 	position: relative;
 	${(props) => props.selected && `background-color: #f7f7f7;`}
 `;
@@ -67,7 +68,7 @@ export const MenuItemImagesImageWrapper = styled.div`
 
 // Styled component for the label of each menu item
 export const MenuItemLabel = styled.span`
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
 	position: relative;
 	bottom: 10px;
@@ -130,6 +131,7 @@ interface MenuItemProps {
 	className?: string;
 	images?: string[];
 	hideLabel?: boolean;
+	group?: boolean;
 	description?: string | null;
 	isRound?: boolean;
 	children?: React.ReactNode;
@@ -160,8 +162,8 @@ const MenuItemsWrapper = styled.div`
 const ArrowCss = css`
 	position: absolute;
 	left: 10px;
-	bottom: 60px;
-	background-color: #f1f1f1;
+	bottom: 45%;
+		background-color: #f1f1f1;
 	border-radius: 30px;
 	width: 32px;
 	height: 32px;
@@ -193,6 +195,27 @@ const ArrowRightIconStyled = styled(Icon)`
 	font-size: 22px;
 `;
 
+
+const GroupIconViewOptions = styled.div<{ selected?: boolean }>`
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	width: 100%;
+	 
+	height: 2.5em;
+	justify-content: center;
+	// align-itemcs: center;
+	text-align: center;
+	display: flex;
+	padding: 5px 0px;
+	background-color: ${(props) => (props.selected ? '#67e008' : '#c7c7c7')};
+
+	&:hover {
+		background-color: #67e008;
+		color: #fff;
+	}
+	
+`;
 // Container component for mobile menu items
 export const MobileItemsContainer: FC<MenuItemsContainerProps> = ({
 	children,
@@ -229,24 +252,24 @@ export const MobileItemsContainer: FC<MenuItemsContainerProps> = ({
 
 	return (
 		<MenuItemsWrapper ref={ref}>
-			{showLeftArrow && isLeftArrowVisible && (
+			{/* {showLeftArrow && isLeftArrowVisible && (
 				<ArrowLeft>
 					<ArrowLeftIconStyled>
 						<ArrowLeftIcon />
 					</ArrowLeftIconStyled>
 				</ArrowLeft>
-			)}
+			)} */}
 
 			{/* Content */}
 			{children}
 
-			{showRightArrow && isRightArrowVisible && (
+			{/* {showRightArrow && isRightArrowVisible && (
 				<ArrowRight>
 					<ArrowRightIconStyled>
 						<ArrowRightIcon />
 					</ArrowRightIconStyled>
 				</ArrowRight>
-			)}
+			)} */}
 		</MenuItemsWrapper>
 	);
 };
@@ -255,11 +278,39 @@ export const MobileItemsContainer: FC<MenuItemsContainerProps> = ({
 export const MenuItem: FC<MenuItemProps> = (props) => {
 	return (
 		<MobileItemContainer onClick={props.onClick} selected={props.selected}>
-			<div className="checkSvg">
-				<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
-					<path d="M25,2C12.318,2,2,12.318,2,25c0,12.683,10.318,23,23,23c12.683,0,23-10.317,23-23C48,12.318,37.683,2,25,2z M35.827,16.562	L24.316,33.525l-8.997-8.349c-0.405-0.375-0.429-1.008-0.053-1.413c0.375-0.406,1.009-0.428,1.413-0.053l7.29,6.764l10.203-15.036	c0.311-0.457,0.933-0.575,1.389-0.266C36.019,15.482,36.138,16.104,35.827,16.562z"></path>
-				</svg>
-			</div>
+			{props.selected &&
+				<div
+					style={{
+						position: "absolute",
+						top: 10,
+						right: 2,
+						display: "flex",
+						justifyContent: "end",
+						alignItems: "center",
+						width: "100%",
+						paddingRight: "10px",
+					}}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						width="20"
+						height="20"
+					>
+						<circle cx="12" cy="12" r="12" fill="black" />
+						<path
+							d="M9 12l2 2 4-4"
+							stroke="white"
+							stroke-width="2"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						/>
+					</svg>
+
+				</div>
+
+			}
 			{!props.hideLabel && <MenuItemLabel>{props.label}</MenuItemLabel>}
 
 			{props.description && props.description.length !== 0 && (
@@ -286,7 +337,8 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 					))}
 				</MenuItemImagesWrapper>
 			)}
-			<div className="select">Select Options</div>
+			<GroupIconViewOptions selected={props.selected} className='GroupIconViewOptions'>{props.group ? 'VIEW OPTIONS' : props.selected ? "Selected" : "Select"}</GroupIconViewOptions>
+
 		</MobileItemContainer>
 	);
 };
