@@ -8,9 +8,14 @@ import { ReactComponent as AISolid } from '../../assets/icons/ai.svg';
 
 export const GroupsContainer = styled.div`
 	display: flex;
-	flex-direction: column;
-	min-width: 130px;
-	width: 130px;
+	flex-direction: row;
+	gap: 15px;
+	flex-wrap: wrap;
+	padding: 0px 10px;
+	// flex-direction: column;
+	//min-width: 130px;
+	//width: 130px;
+	width: 100%;
 	overflow: auto;
 	min-height: 0;
 
@@ -30,17 +35,26 @@ export const GroupsContainer = styled.div`
 export const GroupItem = styled.div`
 	display: flex;
 	flex-flow: column;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	height: 100px;
-	width: 100px;
+	border: 1px solid #bfbaba;
+	// height: 100px;
+	// width: 100px;
+	height: 14em;
+	width: 9em;
 	margin-bottom: 20px;
 	text-align: center;
 	cursor: pointer;
-	padding: 0px 10px 0px 10px;
-
+	// padding: 0px 10px 0px 10px;
+	text-transform: uppercase;
+	
 	&:hover {
 		background-color: white;
+
+		.GroupIconViewOptions {
+			background-color: #67e008;
+			color: #fff;
+		}
 	}
 
 	&.selected {
@@ -71,7 +85,7 @@ export const GroupIcon = styled.img`
 	height: 40px;
 	object-fit: contain;
 	margin-bottom: 10px;
-    max-width: 40%;
+    max-width: 50%;
 `;
 
 export const GroupStar = styled(Icon)`
@@ -80,9 +94,9 @@ export const GroupStar = styled(Icon)`
 `;
 
 export const AttributesContainer = styled.div`
-	background-color: white;
+	background-color: rgb(244, 244, 244);
 	flex: 1;
-	padding: 40px;
+	padding: 4px;
 	min-height: 0;
 	overflow: auto;
 	display: flex;
@@ -120,7 +134,8 @@ export const ItemAccordion = styled.div<{ opened?: boolean }>`
 	display: grid;
 	grid-template-columns: 1fr 20px;
 	cursor: pointer;
-	margin-bottom: 20px;
+	// margin-bottom: 20px;
+	text-align: center;
 	${(props) => props.opened && `border-bottom: 5px solid #f5f6f7;`}
 `;
 
@@ -158,16 +173,16 @@ export const OptionsContainer = styled.div`
 
 export const Options = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(152px, 1fr));
 	gap: 20px;
 	list-style: none;
 	user-select: none;
 	align-items: start;
 	justify-content: start;
-	padding: 30px 0px;
+	padding: 30px 3px;
 	width: 100%;
 	@media (min-width: 1920px) {
-		grid-template-columns: repeat(auto-fill, minmax(100px, 110px));
+		grid-template-columns: repeat(auto-fill, minmax(122px, 110px));
 	}
 `;
 
