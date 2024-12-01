@@ -160,7 +160,7 @@ const DesktopRightSidebar = () => {
 	const [lastSelectedItemsFromSteps, setLastSelectedItemFromSteps] = useState(Map<number, [number, string]>());
 
 	const actualGroups = useActualGroups();
-	console.log(actualGroups, 'actualGroups');
+
 
 	const selectedGroup = selectedGroupId ? actualGroups.find((group) => group.id === selectedGroupId) : null;
 	const selectedStep = selectedGroupId
@@ -619,7 +619,7 @@ const DesktopRightSidebar = () => {
 									wwqweqewqew
 										<OptionsContainer
 											key={'options-container'}
-											onClick={() => setVisibleClickType('Group')}
+											//onClick={() => setVisibleClickType('Group')}
 										>
 											<Options key={'option'}>
 												{selectedAttribute &&

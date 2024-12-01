@@ -35,6 +35,8 @@ const TextArea: FC<{
     const [text, setText] = useState<string>("");
 
     const changeValue = (e: any) => {
+        console.log(e,'text area');
+        
         setText(e.target.value);
         updateJson(index, e.target.value);
     }
