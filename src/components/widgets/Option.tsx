@@ -35,6 +35,8 @@ const OptionSelectionDiv = styled.div`
   align-items: center;
   width: 100%;
   padding-right: 10px;
+  position: absolute;
+  top: 7px;
 `;
 
 const OptionColorTitleDiv = styled.div`
@@ -96,7 +98,7 @@ const OptionIcon = styled.img<{ optionShape?: boolean }>`
     `};
 `;
 
-const OptionName = styled.span`
+const OptionName = styled.div`
     font-size: 12px;
     text-transform: uppercase;
     margin-top: 7px;
@@ -104,11 +106,16 @@ const OptionName = styled.span`
     padding-bottom: 4px;
     text-align:center;
     overflow:hidden;
-
+    height: 33px;
     text-overflow: ellipsis;
     white-space: normal;
     overflow: hidden;
     width: 100%;
+
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 
     @media (max-width: 1025px) {
         font-size:10px;
