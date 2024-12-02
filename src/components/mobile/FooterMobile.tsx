@@ -393,6 +393,7 @@ const FooterMobile = () => {
 							display: 'flex',
 							gap: "20px",
 							alignItems: "center",
+							padding: "0 3px 3px 3px",
 
 						}}
 					>
