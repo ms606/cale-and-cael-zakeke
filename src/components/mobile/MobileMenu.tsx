@@ -287,7 +287,7 @@ const MobileMenu = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isStartRegistering]);
-
+	console.log('currentItems', currentItems)
 	return (
 		<MobileMenuContainer>
 			{sellerSettings && sellerSettings.priceInfoText && (
@@ -357,6 +357,12 @@ const MobileMenu = () => {
 				</TemplatesContainer>
 			)}
 			{selectedGroup && (
+				<p style={{ fontSize: "20px", fontWeight: "bold", color: "black", textAlign: "center" }}>
+					{selectedGroup?.name}
+				</p>
+			)}
+
+			{selectedGroup && (
 				<MobileItemsContainer
 					isLeftArrowVisible
 					isRightArrowVisible
@@ -364,7 +370,6 @@ const MobileMenu = () => {
 					onScrollChange={(value) => setAttributesScroll(value)}
 				>
 					{/* Attributes */}
-
 					{selectedGroup &&
 						!selectedAttributeId &&
 						!selectedTemplateGroupId &&

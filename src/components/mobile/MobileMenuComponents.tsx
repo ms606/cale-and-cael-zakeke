@@ -145,7 +145,7 @@ const MenuItemsWrapper = styled.div`
 	width: 100%;
 	overflow-x: auto;
 	/* background-color: #ffffff; */
-	border-top: 1px #ffffff solid;
+	/* border-top: 1px #ffffff solid; */
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 
