@@ -311,7 +311,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 				</div>
 
 			}
-			{!props.hideLabel && <MenuItemLabel>{props.label}</MenuItemLabel>}
+			{!props.hideLabel && <MenuItemLabel>{props.label?.slice(0, 14)}</MenuItemLabel>}
 
 			{props.description && props.description.length !== 0 && (
 				<Tooltip optionDescription={props.description} $isMobile />
