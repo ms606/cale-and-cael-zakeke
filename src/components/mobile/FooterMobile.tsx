@@ -3,10 +3,10 @@ import { T } from 'Helpers';
 import useStore from 'Store';
 import styled from 'styled-components';
 import { ReactComponent as AngleLeftSolid } from '../../assets/icons/angle-left-solid.svg';
-import { ReactComponent as QuoteSolid } from '../../assets/icons/quote-sign.svg';
-import { ReactComponent as PdfSolid } from '../../assets/icons/file-pdf-solid.svg';
-import { ReactComponent as ShareSolid } from '../../assets/icons/share-alt-square-solid.svg';
-import { ReactComponent as CartSolid } from '../../assets/icons/shopping-cart-solid.svg';
+// import { ReactComponent as QuoteSolid } from '../../assets/icons/quote-sign.svg';
+// import { ReactComponent as PdfSolid } from '../../assets/icons/file-pdf-solid.svg';
+// import { ReactComponent as ShareSolid } from '../../assets/icons/share-alt-square-solid.svg';
+// import { ReactComponent as CartSolid } from '../../assets/icons/shopping-cart-solid.svg';
 import { MessageDialog, QuestionDialog, useDialogManager } from '../dialogs/Dialogs';
 import ErrorDialog from '../dialogs/ErrorDialog';
 import PdfDialog from '../dialogs/PdfDialog';
@@ -103,7 +103,7 @@ const FooterMobileIcon2 = styled.div<{
 	display: inline-flex;
 	min-height: 38px;
 	border: none;
-	border-right: 3px #f4f4f4 solid;
+	/* border-right: 3px #f4f4f4 solid; */
 	cursor: pointer;
 	flex-direction: column;
 	font-weight: medium !important;
@@ -120,16 +120,16 @@ const FooterMobileIcon2 = styled.div<{
 		props.isCart &&
 		`
         display: flex;
-        flex-direction: column-reverse;
         align-items: center;
         justify-content: center;`};
 
 	${(props) =>
 		props.disabled &&
 		`
-      background-color: lightgray;
-      border: 1px solid gray;
-      color: #313c46;
+      background-color: #000;
+	
+    //   border: 1px solid gray;
+      color: white;
   `}
 	${(props) => props.gridArea && `grid-area:${props.gridArea}`};
 `;
@@ -465,13 +465,13 @@ const FooterMobile = () => {
 										{priceFormatter.format(price)}
 									</PriceContainer>
 								)} */}
-						Review & Buy
+						{isQuoteLoading ? "Loading..." : "Review & Buy"}
 						{isOutOfStock && T._('OUT OF STOCK', 'Composer')}
 
 						{/* {!isOutOfStock &&
 								!isAddToCartLoading &&
 								(isDraftEditor || isEditorMode ? <SaveSolid /> : <CartSolid />)} */}
-						{isAddToCartLoading && <TailSpin color='#FFFFFF' height='25px' />}
+						{/* {isAddToCartLoading && <TailSpin color='#FFFFFF' height='12px' />} */}
 					</FooterMobileIcon2>
 					{/* )} */}
 					{/* {product?.quoteRule && !isViewerMode && !isDraftEditor && !isEditorMode && (
