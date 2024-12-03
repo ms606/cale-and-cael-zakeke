@@ -24,7 +24,7 @@ export const MobileMenuContainer = styled.div`
 	position: relative;
 	overflow: auto;
 	background: #8080803b;
-	padding:10px;
+	/* padding:10px; */
 `;
 
 // Styled component for the container of the steps
@@ -287,7 +287,7 @@ const MobileMenu = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isStartRegistering]);
-	console.log('currentItems', currentItems)
+	// console.log('currentItems', currentItems)
 	return (
 		<MobileMenuContainer>
 			{sellerSettings && sellerSettings.priceInfoText && (
@@ -357,9 +357,9 @@ const MobileMenu = () => {
 				</TemplatesContainer>
 			)}
 			{selectedGroup && (
-				<p style={{ fontSize: "20px", fontWeight: "bold", color: "black", textAlign: "center" }}>
+				<div style={{ fontSize: "18px", fontWeight: "bold", color: "black", textAlign: "center", paddingBottom: "3px" }}>
 					{selectedGroup?.name}
-				</p>
+				</div>
 			)}
 
 			{selectedGroup && (

@@ -205,19 +205,19 @@ const Viewer3D = () => {
 					width: "100%", // Full width for mobile
 				}}
 			>
-				<img
+				{/* <img
 					src={logo}
 					alt=""
 					style={{
 						margin: "0 auto",
 						width: "200px",
 					}}
-				/>
+				/> */}
 			</div>
 
 			{!isSceneLoading && <ZakekeViewer bgColor='#f2f2f2' />}
 
-			{!isInfoPointContentVisible && (
+			{!isInfoPointContentVisible && !isMobile && (
 				<>
 					<ZoomInIcon $isMobile={isMobile} key={'zoomin'} hoverable onClick={zoomIn}>
 						<SearchPlusSolid />

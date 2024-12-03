@@ -11,12 +11,12 @@ import noImage from '../../assets/images/no_image.png';
 export const MobileItemContainer = styled.div<{ selected?: boolean }>`
 	align-items: center;
 	justify-content: end;
-	min-width: 130px;
-	max-width: 130px;
-	width: 130px;
-	height: 140px;
-	min-height: 180px;
-	max-height: 1800px;
+	min-width: 120px;
+	max-width: 120px;
+	width: 120px;
+	height: 130px;
+	min-height: 130px;
+	max-height: 130px;
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -33,10 +33,10 @@ export const MobileItemContainer = styled.div<{ selected?: boolean }>`
 
 // Styled component for the image of each menu item
 export const MenuItemImage = styled.img<{ isRound?: boolean }>`
-	width: 64px;
-	height: 64px;
+	width: 50px;
+	height: 50px;
 	object-fit: ${(props) => (props.isRound ? 'cover' : 'contain')};
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	border-radius: ${(props) => (props.isRound ? '64px!important' : '0')};
 `;
 
@@ -68,7 +68,7 @@ export const MenuItemImagesImageWrapper = styled.div`
 
 // Styled component for the label of each menu item
 export const MenuItemLabel = styled.span`
-	font-size: 12px;
+	font-size: 10px!important;
 	font-weight: 500;
 	position: relative;
 	bottom: 10px;
@@ -197,7 +197,7 @@ const ArrowRightIconStyled = styled(Icon)`
 
 
 const GroupIconViewOptions = styled.div<{ selected?: boolean }>`
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 600;
 	text-transform: uppercase;
 	width: 100%;
@@ -282,8 +282,8 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 				<div
 					style={{
 						position: "absolute",
-						top: 10,
-						right: 2,
+						top: 4,
+						right: 1,
 						display: "flex",
 						justifyContent: "end",
 						alignItems: "center",
@@ -311,7 +311,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
 				</div>
 
 			}
-			{!props.hideLabel && <MenuItemLabel>{props.label?.slice(0, 14)}</MenuItemLabel>}
+			{!props.hideLabel && <MenuItemLabel>{props.label}</MenuItemLabel>}
 
 			{props.description && props.description.length !== 0 && (
 				<Tooltip optionDescription={props.description} $isMobile />
