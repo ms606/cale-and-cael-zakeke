@@ -35,10 +35,15 @@ const TextArea: FC<{
     const [text, setText] = useState<string>("");
 
     const changeValue = (e: any) => {
-        console.log(e,'text area');
+        const inputText = e.target.value;
+        const formattedText = inputText.split("").join("\n"); // Add a new line after each character
+
+        console.log(formattedText,'ft');
         
-        setText(e.target.value);
-        updateJson(index, e.target.value);
+        setText(formattedText);
+        updateJson(index, formattedText);
+       // setText(e.target.value);
+        //updateJson(index, e.target.value);
     }
 
     return (

@@ -19,6 +19,7 @@ const OptionContainer = styled.div<{ optionShape: number, selected: boolean, has
     user-select: none;
     width: 100%;
     min-width: 0;
+    box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 31%);
 
     &:hover {
        background-color: #f5f6f7;

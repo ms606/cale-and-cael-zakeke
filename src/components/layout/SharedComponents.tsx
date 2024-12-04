@@ -47,6 +47,7 @@ export const GroupItem = styled.div`
 	cursor: pointer;
 	// padding: 0px 10px 0px 10px;
 	text-transform: uppercase;
+	box-shadow: 5px 5px 10px 2px rgb(0 0 0 / 31%);
 	
 	&:hover {
 		background-color: white;

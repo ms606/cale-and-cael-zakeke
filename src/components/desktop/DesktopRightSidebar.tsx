@@ -117,7 +117,7 @@ const ApplyButton = styled.div`
 const OptionApplyButton = styled.div`
 	border: 1px solid;
 	box-shadow: 3px 3px;
-	width: 121px;
+	width: 183px;
 	padding: 8px;
 	display: flex;
 	justify-content: center;
@@ -126,6 +126,10 @@ const OptionApplyButton = styled.div`
 	cursor: pointer;
 	margin-left: auto;
 	margin-rigt: 10px;
+    background: black;
+    color: white;
+    border-radius: 6%;
+
 	// position: absolute;
     // bottom: 5em;
     // right: 16px;
