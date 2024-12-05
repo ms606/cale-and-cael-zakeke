@@ -397,9 +397,24 @@ const FooterMobile = () => {
 
 						}}
 					>
-						<FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
+						{/* <FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
 							<AngleLeftSolid />
-						</FooterMobileIcon>
+						</FooterMobileIcon> */}
+						<button
+							style={{
+								display: 'flex',
+								justifyContent: 'center',
+								alignItems: 'center',
+								padding: '10px',
+								backgroundColor: '#000',
+								color: 'white',
+							}}
+							hidden={selectedGroupId === null}
+							onClick={handleBackClick}
+						>
+							Apply
+						</button>
+
 
 						<div
 							style={{

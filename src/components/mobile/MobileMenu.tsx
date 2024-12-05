@@ -357,7 +357,7 @@ const MobileMenu = () => {
 				</TemplatesContainer>
 			)}
 			{selectedGroup && (
-				<div style={{ fontSize: "18px", fontWeight: "bold", color: "black", textAlign: "center", paddingBottom: "3px" }}>
+				<div style={{ fontSize: "18px", fontWeight: "bold", color: "black", textAlign: "center", padding: "5px 0 3px 0" }}>
 					{selectedGroup?.name}
 				</div>
 			)}
