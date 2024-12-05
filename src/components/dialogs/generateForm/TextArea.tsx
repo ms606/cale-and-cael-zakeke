@@ -2,10 +2,11 @@ import { FC, useState } from "react";
 import styled from 'styled-components';
 
 const TextAreaAndLabelContainer = styled.div`
-    display: flex;
+    // display: flex;
     flex-flow: column;
     grid-gap: 5px;
     margin-bottom: 20px;
+    display: none;
 `;
 
 const Label = styled.span`
