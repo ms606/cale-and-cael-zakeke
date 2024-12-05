@@ -128,6 +128,20 @@ const FontCustomSingleValueContainer = styled.div`
 	height: 100%;
 `;
 
+const NewInputTextVertical = styled.input`
+    height: 3em;
+	border-radius: 1%;
+	border: 0;
+	border-bottom: 2px solid gray;
+	background: none;
+ 
+	&:focus {
+		outline-width: 0;
+}
+	}
+		
+`;
+
 const FontOption = (props: JSX.IntrinsicAttributes & OptionProps<any, boolean, GroupBase<any>>) => {
 	return (
 		<components.Option {...props}>
@@ -175,22 +189,41 @@ const ItemText: FC<{
 	const isItalic = weightData.length > 1 ? weightData[0] === 'italic' : false;
 
 	const setItemTextDebounced = (value: string) => {
-		handleItemPropChange?.(item, 'text', isUpperCase ? value.toUpperCase() : value);
-		debounce(() => {
-			const initialText = value;
-			const sanitizationInfo = currentFont
-				? getSanitationText(currentFont, value)
-				: {
-						sanitizedText: value,
-						dirtyChars: []
-				  };
-			setDirtyCharInserted(sanitizationInfo.dirtyChars);
-			const text = sanitizationInfo.sanitizedText;
+		const inputText = value;
+		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
 
-			if (text !== initialText) {
-				handleItemPropChange?.(item, 'text', isUpperCase ? text.toUpperCase() : text);
-			}
-		}, 500)();
+		handleItemPropChange?.(item, 'text', isUpperCase ? value.toUpperCase() : formattedText);
+
+		// debounce(() => {
+		// 	const initialText = value;
+		// 	const sanitizationInfo = currentFont
+		// 		? getSanitationText(currentFont, value)
+		// 		: {
+		// 				sanitizedText: value,
+		// 				dirtyChars: []
+		// 		  };
+		// 	setDirtyCharInserted(sanitizationInfo.dirtyChars);
+		// 	const text = sanitizationInfo.sanitizedText;
+		// 		  console.log(text,'tetsssttt');
+				  
+		// 	if (text !== initialText) {
+		// 		console.log(text !== initialText);
+				
+		// 		const inputText = text;
+		// 		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
+
+		// 		console.log(formattedText, 'ft');
+
+		// 		handleItemPropChange?.(item, 'text', isUpperCase ? formattedText.toUpperCase() : formattedText);
+		// 	}
+		// }, 500)();
+	};
+
+	const setItemTextNew = (value: string) => {
+
+		const inputText = value;
+		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
+		handleItemPropChange?.(item, 'text', isUpperCase ? formattedText.toUpperCase() : formattedText);
 	};
 
 	const handleFontChange = (font: string) => {
@@ -227,6 +260,19 @@ const ItemText: FC<{
 						maxLength={!item.constraints ? null : item.constraints.maxNrChars || null}
 						disabled={!canEdit || fontLoading}
 					/>
+
+					<NewInputTextVertical
+					 className='inputZipper'
+					 value={isUpperCase ? item.text.toUpperCase() : item.text}
+					 onChange={(e) => {
+						// e.currentTarget.value = e.currentTarget.value.replace('⠀', '');	
+						setItemTextNew(e.currentTarget.value)					
+					}}
+					placeholder={'Enter your label'}
+					 
+
+					/>	
+
 					{dirtyCharInserted.length > 0 && currentFont && (
 						<div style={{ color: 'red' }}>
 							{T._(

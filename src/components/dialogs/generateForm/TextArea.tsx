@@ -2,10 +2,11 @@ import { FC, useState } from "react";
 import styled from 'styled-components';
 
 const TextAreaAndLabelContainer = styled.div`
-    display: flex;
+    // display: flex;
     flex-flow: column;
     grid-gap: 5px;
     margin-bottom: 20px;
+    display: none;
 `;
 
 const Label = styled.span`
@@ -35,10 +36,15 @@ const TextArea: FC<{
     const [text, setText] = useState<string>("");
 
     const changeValue = (e: any) => {
-        console.log(e,'text area');
+        const inputText = e.target.value;
+        const formattedText = inputText.split("").join("\n"); // Add a new line after each character
+
+        console.log(formattedText,'ft');
         
-        setText(e.target.value);
-        updateJson(index, e.target.value);
+        setText(formattedText);
+        updateJson(index, formattedText);
+       // setText(e.target.value);
+        //updateJson(index, e.target.value);
     }
 
     return (
