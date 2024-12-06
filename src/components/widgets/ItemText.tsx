@@ -174,7 +174,8 @@ const ItemText: FC<{
 	const canEdit = constraints?.canEdit ?? true;
 	const hasCurvedText = item.isTextOnPath;
 	const isUpperCase = constraints?.toUppercase ?? false;
-
+	console.log(item, item.name,'item name');
+	
 	let currentFont = fonts?.find((x) => x.name === item.fontFamily);
 
 	const textRestrictions = getPrintingMethodsRestrictions();
@@ -189,34 +190,24 @@ const ItemText: FC<{
 	const isItalic = weightData.length > 1 ? weightData[0] === 'italic' : false;
 
 	const setItemTextDebounced = (value: string) => {
-		const inputText = value;
-		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
+		
+		handleItemPropChange?.(item, 'text', isUpperCase ? value.toUpperCase() : value);
 
-		handleItemPropChange?.(item, 'text', isUpperCase ? value.toUpperCase() : formattedText);
-
-		// debounce(() => {
-		// 	const initialText = value;
-		// 	const sanitizationInfo = currentFont
-		// 		? getSanitationText(currentFont, value)
-		// 		: {
-		// 				sanitizedText: value,
-		// 				dirtyChars: []
-		// 		  };
-		// 	setDirtyCharInserted(sanitizationInfo.dirtyChars);
-		// 	const text = sanitizationInfo.sanitizedText;
-		// 		  console.log(text,'tetsssttt');
+		debounce(() => {
+			const initialText = value;
+			const sanitizationInfo = currentFont
+				? getSanitationText(currentFont, value)
+				: {
+						sanitizedText: value,
+						dirtyChars: []
+				  };
+			setDirtyCharInserted(sanitizationInfo.dirtyChars);
+			const text = sanitizationInfo.sanitizedText;			
 				  
-		// 	if (text !== initialText) {
-		// 		console.log(text !== initialText);
-				
-		// 		const inputText = text;
-		// 		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
-
-		// 		console.log(formattedText, 'ft');
-
-		// 		handleItemPropChange?.(item, 'text', isUpperCase ? formattedText.toUpperCase() : formattedText);
-		// 	}
-		// }, 500)();
+			if (text !== initialText) {							
+				handleItemPropChange?.(item, 'text', isUpperCase ? text.toUpperCase() : text);
+			}
+		}, 500)();
 	};
 
 	const setItemTextNew = (value: string) => {
@@ -251,7 +242,7 @@ const ItemText: FC<{
 						)
 					}
 				>
-					<TextArea
+					{(!item.name.match(/zip*/)) && <TextArea
 						value={isUpperCase ? item.text.toUpperCase() : item.text}
 						onChange={(e) => {
 							e.currentTarget.value = e.currentTarget.value.replace('⠀', '');
@@ -259,19 +250,18 @@ const ItemText: FC<{
 						}}
 						maxLength={!item.constraints ? null : item.constraints.maxNrChars || null}
 						disabled={!canEdit || fontLoading}
-					/>
+					/>}
 
-					<NewInputTextVertical
+					{(item.name.match(/zip*/)) &&<NewInputTextVertical
 					 className='inputZipper'
 					 value={isUpperCase ? item.text.toUpperCase() : item.text}
 					 onChange={(e) => {
 						// e.currentTarget.value = e.currentTarget.value.replace('⠀', '');	
 						setItemTextNew(e.currentTarget.value)					
-					}}
+					}}				 
 					placeholder={'Enter your label'}
-					 
-
 					/>	
+				    }
 
 					{dirtyCharInserted.length > 0 && currentFont && (
 						<div style={{ color: 'red' }}>
