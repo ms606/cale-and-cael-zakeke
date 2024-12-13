@@ -19,7 +19,7 @@ const LoadingBackground = styled.div`
 const LoadingContainer = styled.div`
 	width: 68px;
 	height: 68px;
-	background-color: white;
+	background-color: fff;
 	border-radius: 5px;
 	padding: 10px;
 `;

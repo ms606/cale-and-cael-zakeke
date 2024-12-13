@@ -1,6 +1,6 @@
 import { useZakeke } from '@zakeke/zakeke-configurator-react';
 import { T } from 'Helpers';
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as CheckSolid } from '../../assets/icons/check-circle-solid_1.svg';
 import { Icon } from 'components/Atomic';
@@ -16,8 +16,9 @@ const LoadingLabel = styled.div`
 
 const LoaderContainer = styled.div<{ $isMobile: boolean }>`
 	height: 8px;
-	${(props) => (props.$isMobile ? `width: 250px` : `width: 600px`)};
+	width: ${(props) => (props.$isMobile ? '250px' : '100%')};
 	border-radius: 4px;
+	margin: 0 auto;
 	background-color: #dbe2e6;
 `;
 
@@ -41,12 +42,19 @@ const CheckIcon = styled(Icon)`
 
 const LoaderFill = styled.div<{ $completed: number; $bgColor: string; $isCompleted: boolean }>`
 	height: 100%;
+	width: ${(props) => `${props.$completed}%`};
+	background-color: ${(props) => (props.$isCompleted ? '#008556' : props.$bgColor)};
 	border-radius: 4px;
-	margin: 7px 0px;
-	${(props) => `width: ${props.$completed}% `};
-	${(props) =>
-		props.$bgColor && props.$isCompleted ? `background-color: #008556` : `background-color: ${props.$bgColor}`};
-	border-radius: 'inherit';
+	transition: width 0.5s ease-in-out;
+`;
+
+const VideoPlayer = styled.video`
+	width: 100%;
+	height: 60vh;
+
+	@media (max-width: 768px) {
+		height: auto;
+	}
 `;
 
 const ProgressBar: FC<{ $flagStartLoading: boolean; $bgColor: string; $completed: number }> = ({
@@ -56,18 +64,42 @@ const ProgressBar: FC<{ $flagStartLoading: boolean; $bgColor: string; $completed
 }) => {
 	const { isSceneLoading } = useZakeke();
 	const { isMobile } = useStore();
-	
+	const videoRef = useRef<HTMLVideoElement | null>(null);
+
+	useEffect(() => {
+		const video = videoRef.current;
+		if (video) {
+			video.muted = true;
+			video.play();
+
+			const handleVideoEnd = () => {
+				console.log('Video has played completely at least once.');
+				video.play();
+			};
+
+			video.addEventListener('ended', handleVideoEnd);
+
+			return () => {
+				video.removeEventListener('ended', handleVideoEnd);
+			};
+		}
+	}, []);
+
 	return (
 		<div>
-			<LoadingLabel>
+			<VideoPlayer ref={videoRef} id="myVideo">
+				<source src="/loading.mp4" type="video/mp4" />
+				Your browser does not support the video tag.
+			</VideoPlayer>
+			{/* <LoadingLabel>
 				{isSceneLoading ? T._('Loading your product...', 'Composer') : T._('Loading complete.', 'Composer')}
-			</LoadingLabel>
+			</LoadingLabel> */}
 			<LoaderContainer $isMobile={isMobile}>
 				<LoaderFill
 					$completed={!isSceneLoading && $flagStartLoading ? 100 : $completed}
 					$bgColor={$bgColor}
 					$isCompleted={!isSceneLoading && $flagStartLoading}
-				></LoaderFill>
+				/>
 				<LoadingPercentageandIconContainer>
 					<LoadingPercentageLabel>
 						{isSceneLoading ? T._('In progress | ', 'Composer') + `${$completed}%` : '100%'}
