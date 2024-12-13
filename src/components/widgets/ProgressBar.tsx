@@ -15,7 +15,7 @@ const LoadingLabel = styled.div`
 `;
 
 const LoaderContainer = styled.div<{ $isMobile: boolean }>`
-	height: 8px;
+	height: 5px;
 	width: ${(props) => (props.$isMobile ? '250px' : '100%')};
 	border-radius: 4px;
 	margin: 0 auto;

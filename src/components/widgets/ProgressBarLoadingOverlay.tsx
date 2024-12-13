@@ -54,7 +54,7 @@ const ProgressBarLoadingOverlay: FC<{ flagStartLoading: boolean }> = ({ flagStar
 	return (
 		<ProgressBarLoadingBackground>
 			<ProgressBarLoadingContainer $isMobile={isMobile}>
-				<ProgressBar $flagStartLoading={flagStartLoading} $bgColor={'#F46200'} $completed={completed} />
+				<ProgressBar $flagStartLoading={flagStartLoading} $bgColor={'#000000'} $completed={completed} />
 			</ProgressBarLoadingContainer>
 		</ProgressBarLoadingBackground>
 	);
