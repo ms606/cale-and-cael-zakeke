@@ -242,7 +242,7 @@ const ItemText: FC<{
 						)
 					}
 				>
-					{(!item.name.match(/zip*/)) && <TextArea
+					{(item.name !== null && !item.name.match(/zip*/)) && <TextArea
 						value={isUpperCase ? item.text.toUpperCase() : item.text}
 						onChange={(e) => {
 							e.currentTarget.value = e.currentTarget.value.replace('⠀', '');
