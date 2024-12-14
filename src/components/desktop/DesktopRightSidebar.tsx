@@ -607,12 +607,12 @@ const DesktopRightSidebar = () => {
 															{' '}
 															{T._d(item.name.toUpperCase())}{' '}
 														</ItemName>
-														<OptionSelectedName>
+														{/* <OptionSelectedName>
 															{item.options.find((opt) => opt.selected)
 																? T._d(item.options.find((opt) => opt.selected)!.name)
 																: ''}
 														</OptionSelectedName>
-														<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
+														<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton> */}
 													</ItemContainer>
 												);
 											else
