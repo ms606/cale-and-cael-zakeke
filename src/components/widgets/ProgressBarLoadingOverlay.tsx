@@ -26,7 +26,8 @@ const ProgressBarLoadingContainer = styled.div<{ $isMobile?: boolean }>`
 	display: inline-flex;
 	padding: 48px 24px;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: center;
+	justify-content: center;
 	gap: 8px;
 	border-radius: 4px;
 	background: var(--surface-default, #fff);
