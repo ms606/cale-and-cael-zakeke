@@ -100,18 +100,32 @@ const OptionSelectionDiv = styled.div`
 `;
 
 const ApplyButton = styled.div`
+
 	border: 1px solid;
-	box-shadow: 3px 3px;
-	width: 121px;
-	padding: 8px;
-	display: flex;
-	justify-content: center;
-	align-item: center;
-	text-align: center;
-	cursor: pointer;
-	position: absolute;
-    bottom: 5em;
-    right: 16px;
+    box-shadow: 3px 3px;
+    width: 183px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    margin-left: auto;
+    background: black;
+    color: white;
+    border-radius: 6%;
+
+	// border: 1px solid;
+	// box-shadow: 3px 3px;
+	// width: 121px;
+	// padding: 8px;
+	// display: flex;
+	// justify-content: center;
+	// align-item: center;
+	// text-align: center;
+	// cursor: pointer;
+	// position: absolute;
+    // bottom: 5em;
+    // right: 16px;
 `;
 
 const OptionApplyButton = styled.div`
@@ -593,12 +607,12 @@ const DesktopRightSidebar = () => {
 															{' '}
 															{T._d(item.name.toUpperCase())}{' '}
 														</ItemName>
-														<OptionSelectedName>
+														{/* <OptionSelectedName>
 															{item.options.find((opt) => opt.selected)
 																? T._d(item.options.find((opt) => opt.selected)!.name)
 																: ''}
 														</OptionSelectedName>
-														<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
+														<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton> */}
 													</ItemContainer>
 												);
 											else

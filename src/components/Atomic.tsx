@@ -33,7 +33,7 @@ export const Icon = styled.div<{ hoverable?: boolean }>`
 
 // Styled component for a textarea
 export const TextArea = styled.textarea`
-    display: none;
+   // display: none;
 	background-color: transparent;
 	padding: 10px 20px;
 	color: #414042;
