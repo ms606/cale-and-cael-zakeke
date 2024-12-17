@@ -188,8 +188,8 @@ const DesktopRightSidebar = () => {
 	const currentTemplateGroups = selectedStep
 		? selectedStep.templateGroups
 		: selectedGroup
-		? selectedGroup.templateGroups
-		: [];
+			? selectedGroup.templateGroups
+			: [];
 
 	const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
 		(a, b) => a.displayOrder - b.displayOrder
@@ -537,8 +537,8 @@ const DesktopRightSidebar = () => {
 														? savedCompositionsIcon
 														: group.imageUrl
 													: group.id === -2
-													? textIcon
-													: star
+														? textIcon
+														: star
 											}
 										/>
 										<GroupIconViewOptions className='GroupIconViewOptions'>VIEW OPTIONS</GroupIconViewOptions>
@@ -634,10 +634,10 @@ const DesktopRightSidebar = () => {
 
 								{lastSelectedItem?.type === 'attribute' ? (
 									<>
-									wwqweqewqew
+										{/* wwqweqewqew */}
 										<OptionsContainer
 											key={'options-container'}
-											//onClick={() => setVisibleClickType('Group')}
+										//onClick={() => setVisibleClickType('Group')}
 										>
 											<Options key={'option'}>
 												{selectedAttribute &&
@@ -655,7 +655,7 @@ const DesktopRightSidebar = () => {
 														))}
 											</Options>
 										</OptionsContainer>
-										
+
 										<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
 										<AttributeDescription>{selectedAttribute?.description}</AttributeDescription>
 									</>
@@ -703,30 +703,30 @@ const DesktopRightSidebar = () => {
 													)}
 
 													{/* Enable Disable this component for visibilty */}
-													
+
 													{visibleClickType == 'Option' && attributesOpened.get(item.id) && (
 														<>
-														<OptionsContainer //onClick={() => setVisibleClickType('Group')}
-														>
-															<Options //onClick={() => setVisibleClickType('Group')}
+															<OptionsContainer //onClick={() => setVisibleClickType('Group')}
 															>
-																{item.options
-																	.filter((x) => x.enabled)
-																	.map((option) => (
-																		<OptionItem
-																			key={option.guid}
-																			selectedAttribute={selectedAttribute}
-																			option={option}
-																			hasDescriptionIcon={item.options.some(
-																				(x) => x.description
-																			)}
-																		/>
-																	))}
-															</Options>
-														</OptionsContainer>
-														<OptionApplyButton onClick={() => setVisibleClickType('Group')}>Apply</OptionApplyButton>
+																<Options //onClick={() => setVisibleClickType('Group')}
+																>
+																	{item.options
+																		.filter((x) => x.enabled)
+																		.map((option) => (
+																			<OptionItem
+																				key={option.guid}
+																				selectedAttribute={selectedAttribute}
+																				option={option}
+																				hasDescriptionIcon={item.options.some(
+																					(x) => x.description
+																				)}
+																			/>
+																		))}
+																</Options>
+															</OptionsContainer>
+															<OptionApplyButton onClick={() => setVisibleClickType('Group')}>Apply</OptionApplyButton>
 														</>
-														
+
 													)}
 												</ItemAccordionContainer>
 											);

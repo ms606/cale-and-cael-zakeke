@@ -168,14 +168,14 @@ const OptionItem: FC<{ selectedAttribute: Attribute | null | undefined, option: 
         onClick={() => handleOptionSelection(option)}>
 
         {option.selected && <OptionSelectionDiv> <TickButton /> </OptionSelectionDiv>}
-        <OptionColorTitleDiv>COLOR</OptionColorTitleDiv>
+        {/* <OptionColorTitleDiv>COLOR</OptionColorTitleDiv> */}
         <OptionIconContainer>
             {option.description && option.description.length !== 0 &&
                 <Tooltip key={"tooltip" + option.guid} optionDescription={option.description} />
             }
-            {option.imageUrl && <OptIconContainer><OptionIcon loading="lazy" 
-            // fetchpriority="low" 
-            src={option.imageUrl ?? ""} optionShape={option.attribute.optionShapeType === 2} /></OptIconContainer>}
+            {option.imageUrl && <OptIconContainer><OptionIcon loading="lazy"
+                // fetchpriority="low" 
+                src={option.imageUrl ?? ""} optionShape={option.attribute.optionShapeType === 2} /></OptIconContainer>}
         </OptionIconContainer>
 
         {!option.attribute.hideOptionsLabel && <OptionName >{T._d(option.name)}</OptionName>}
