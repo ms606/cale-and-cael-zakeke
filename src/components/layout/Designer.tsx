@@ -198,6 +198,7 @@ const Designer: FC<{ onCloseClick?: () => void }> = ({ onCloseClick }) => {
 
 	const filteredAreas = product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
 	let finalVisibleAreas: ProductArea[] = [];
+console.log(filteredAreas,'filteredAreas');
 
 	const [moveElements, setMoveElements] = useState(false);
 
@@ -328,6 +329,8 @@ const Designer: FC<{ onCloseClick?: () => void }> = ({ onCloseClick }) => {
 			<AddTextDialog
 				onClose={() => closeDialog('add-text')}
 				onConfirm={(item) => {
+					console.log(item,'check this');
+					
 					addItemText(item, actualAreaId);
 					closeDialog('add-text');
 				}}
@@ -443,9 +446,7 @@ const Designer: FC<{ onCloseClick?: () => void }> = ({ onCloseClick }) => {
 				setItemColor(item.guid, value as string);
 				break;
 			case 'font-family':
-				console.log(item);
 				setItemFontFamily(item.guid, value as string);
-				console.log(item);
 				break;
 			case 'text-path':
 				setItemTextOnPath(item.guid, actualAreaId, value as boolean);
@@ -511,6 +512,7 @@ const Designer: FC<{ onCloseClick?: () => void }> = ({ onCloseClick }) => {
 							}}
 						>
 							{finalVisibleAreas.map((area) => (
+								
 								<Area
 									key={area.id}
 									selected={actualAreaId === area.id}

@@ -38,6 +38,7 @@ import {
 } from '../layout/SharedComponents';
 import Steps from '../layout/Steps';
 import TemplateGroup from 'components/TemplateGroup';
+import ItemText from 'components/widgets/ItemText';
 
 export const DesktopRightSidebarContainer = styled.div`
 	display: flex;
@@ -100,19 +101,18 @@ const OptionSelectionDiv = styled.div`
 `;
 
 const ApplyButton = styled.div`
-
 	border: 1px solid;
-    box-shadow: 3px 3px;
-    width: 183px;
-    padding: 8px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    cursor: pointer;
-    margin-left: auto;
-    background: black;
-    color: white;
-    border-radius: 6%;
+	box-shadow: 3px 3px;
+	width: 183px;
+	padding: 8px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	cursor: pointer;
+	margin-left: auto;
+	background: black;
+	color: white;
+	border-radius: 6%;
 
 	// border: 1px solid;
 	// box-shadow: 3px 3px;
@@ -124,8 +124,8 @@ const ApplyButton = styled.div`
 	// text-align: center;
 	// cursor: pointer;
 	// position: absolute;
-    // bottom: 5em;
-    // right: 16px;
+	// bottom: 5em;
+	// right: 16px;
 `;
 
 const OptionApplyButton = styled.div`
@@ -140,20 +140,47 @@ const OptionApplyButton = styled.div`
 	cursor: pointer;
 	margin-left: auto;
 	margin-rigt: 10px;
-    background: black;
-    color: white;
-    border-radius: 6%;
+	background: black;
+	color: white;
+	border-radius: 6%;
 
 	// position: absolute;
-    // bottom: 5em;
-    // right: 16px;
+	// bottom: 5em;
+	// right: 16px;
 `;
 
+const NewInputTextVertical = styled.input`
+    height: 3em;
+	border-radius: 1%;
+	// border: 0;
+	border-bottom: 2px solid gray;
+	background: white;
+	width: 10em;
+    font-size: 20px;
+	position: relative;
+    top: 10em;
+	left: 1em;
+	&:focus {
+		outline-width: 0;
+}
+	}
+		
+`;
 
 // This is the right sidebar component for the desktop layout
 // that contains the list of groups, steps, attributes and options.
 const DesktopRightSidebar = () => {
-	const { isSceneLoading, templates, currentTemplate, setCamera, setTemplate, draftCompositions } = useZakeke();
+	const {
+		isSceneLoading,
+		templates,
+		currentTemplate,
+		setCamera,
+		setTemplate,
+		draftCompositions,
+		setItemText,
+		addItemText,
+		items
+	} = useZakeke();
 
 	const {
 		setSelectedGroupId,
@@ -177,8 +204,11 @@ const DesktopRightSidebar = () => {
 	const [lastSelectedItemsFromGroups, setLastSelectedItemsFromGroups] = useState(Map<number, [number, string]>());
 	const [lastSelectedItemsFromSteps, setLastSelectedItemFromSteps] = useState(Map<number, [number, string]>());
 
+	const [customTextMessage, setCustomTextMessage] = useState('' as string);
+
 	const actualGroups = useActualGroups();
 
+	const guidNo = items.find(({ name }) => name.match(/zip*/));
 
 	const selectedGroup = selectedGroupId ? actualGroups.find((group) => group.id === selectedGroupId) : null;
 	const selectedStep = selectedGroupId
@@ -188,15 +218,32 @@ const DesktopRightSidebar = () => {
 	const currentTemplateGroups = selectedStep
 		? selectedStep.templateGroups
 		: selectedGroup
-			? selectedGroup.templateGroups
-			: [];
+		? selectedGroup.templateGroups
+		: [];
 
 	const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
 		(a, b) => a.displayOrder - b.displayOrder
 	);
+
 	const selectedAttribute = currentAttributes
 		? currentAttributes.find((attr) => attr.id === selectedAttributeId)
 		: null;
+
+	const selectedOptionName = selectedAttribute
+		? selectedAttribute.options.find((options) => options.selected === true)
+		: null;
+
+	const setItemTextNew = (value: string) => {
+		const inputText = value;
+		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
+		// handleItemPropChange?.(obj, 'text', formattedText);
+		setCustomTextMessage(value);
+
+		if (items) {
+			const guidNo = items.find(({ name }) => name.match(/zip*/));
+			if (guidNo) setItemText(guidNo?.guid, formattedText);
+		}
+	};
 
 	const selectedTemplateGroup = currentTemplateGroups
 		? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
@@ -502,6 +549,18 @@ const DesktopRightSidebar = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isStartRegistering]);
 
+	const obj = {
+		constraints: null,
+		fillColor: '#287fb9',
+		fontFamily: 'Adamina',
+		fontSize: 48,
+		fontWeight: 'normal normal',
+		guid: '',
+		isTextOnPath: false,
+		name: '',
+		text: customTextMessage
+	} as { text: string; fontFamily: string };
+
 	return (
 		<DesktopRightSidebarContainer>
 			{visibleClickType === 'Group' && (
@@ -519,10 +578,7 @@ const DesktopRightSidebar = () => {
 											setVisibleClickType('Option');
 										}}
 									>
-										<OptionSelectionDiv>
-											{' '}
-											{/* <TickButton />{' '} */}
-										</OptionSelectionDiv>
+										<OptionSelectionDiv> {/* <TickButton />{' '} */}</OptionSelectionDiv>
 
 										<GroupNameTitle>
 											<>{group.name ? T._d(group.name) : T._('Customize', 'Composer')}</>
@@ -537,208 +593,180 @@ const DesktopRightSidebar = () => {
 														? savedCompositionsIcon
 														: group.imageUrl
 													: group.id === -2
-														? textIcon
-														: star
+													? textIcon
+													: star
 											}
 										/>
-										<GroupIconViewOptions className='GroupIconViewOptions'>VIEW OPTIONS</GroupIconViewOptions>
+										<GroupIconViewOptions className='GroupIconViewOptions'>
+											VIEW OPTIONS
+										</GroupIconViewOptions>
 									</GroupItem>
 								);
 							else return null;
 						})}
 				</GroupsContainer>
 			)}
-			{visibleClickType === 'Option' && <AttributesContainer key={selectedAttributeId}>
-				{/* Steps */}
-				{selectedGroup && selectedGroupId !== -2 && selectedGroup.steps && selectedGroup.steps.length > 0 && (
-					<Steps
-						key={'steps-' + selectedGroupId}
-						hasNextGroup={groupIndex !== actualGroups.length - 1}
-						hasPreviousGroup={groupIndex !== 0}
-						onNextStep={handleNextStep}
-						onPreviousStep={handlePreviousStep}
-						currentStep={selectedStep}
-						steps={selectedGroup.steps}
-						onStepChange={handleStepChange}
-					/>
-				)}
+			{visibleClickType === 'Option' && (
+				<AttributesContainer key={selectedAttributeId}>
+					{/* Steps */}
+					{selectedGroup &&
+						selectedGroupId !== -2 &&
+						selectedGroup.steps &&
+						selectedGroup.steps.length > 0 && (
+							<Steps
+								key={'steps-' + selectedGroupId}
+								hasNextGroup={groupIndex !== actualGroups.length - 1}
+								hasPreviousGroup={groupIndex !== 0}
+								onNextStep={handleNextStep}
+								onPreviousStep={handlePreviousStep}
+								currentStep={selectedStep}
+								steps={selectedGroup.steps}
+								onStepChange={handleStepChange}
+							/>
+						)}
 
-				{selectedGroupId && selectedGroupId !== -2 && selectedGroupId !== -3 && (
-					<>
-						{/* Attributes */}
-						{selectedGroup?.direction === 0 && (
-							<>
-								<CarouselContainer
-									key={selectedGroupId}
-									slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
-									slideIndex={selectedCarouselSlide}
-									afterSlide={setSelectedCarouselSlide}
-									slidesToScroll={1}
-									speed={50}
-									renderBottomCenterControls={() => <span />}
-									renderCenterRightControls={({ nextSlide, currentSlide, slideCount }) =>
-										currentSlide + (window.innerWidth <= 1600 ? 3 : 4) > slideCount - 1 ? null : (
-											<SliderArrow arrowDirection='right' onClick={nextSlide}>
-												<AngleRightSolid />
-											</SliderArrow>
-										)
-									}
-									renderCenterLeftControls={({ previousSlide, currentSlide, slideCount }) =>
-										currentSlide === 0 ? null : (
-											<SliderArrow arrowDirection='left' onClick={previousSlide}>
-												<AngleLeftSolid />
-											</SliderArrow>
-										)
-									}
-								>
-									{currentItems &&
-										currentItems.map((item) => {
-											if (!(item instanceof ThemeTemplateGroup))
-												return (
-													<ItemContainer
-														onClick={() => {
-															setVisibleClickType('Group');
-															handleAttributeSelection(item.id);
-														}}
-														selected={item.id === lastSelectedItem?.id}
-														key={item.guid}
-													>
-														<ItemName key={item.name}>
-															{' '}
-															{T._d(item.name.toUpperCase())}{' '}
-														</ItemName>
-														{/* <OptionSelectedName>
+					{selectedGroupId && selectedGroupId !== -2 && selectedGroupId !== -3 && (
+						<>
+							{/* Attributes */}
+							{selectedGroup?.direction === 0 && (
+								<>
+									<CarouselContainer
+										key={selectedGroupId}
+										slidesToShow={window.innerWidth <= 1600 ? 3 : 4}
+										slideIndex={selectedCarouselSlide}
+										afterSlide={setSelectedCarouselSlide}
+										slidesToScroll={1}
+										speed={50}
+										renderBottomCenterControls={() => <span />}
+										renderCenterRightControls={({ nextSlide, currentSlide, slideCount }) =>
+											currentSlide + (window.innerWidth <= 1600 ? 3 : 4) >
+											slideCount - 1 ? null : (
+												<SliderArrow arrowDirection='right' onClick={nextSlide}>
+													<AngleRightSolid />
+												</SliderArrow>
+											)
+										}
+										renderCenterLeftControls={({ previousSlide, currentSlide, slideCount }) =>
+											currentSlide === 0 ? null : (
+												<SliderArrow arrowDirection='left' onClick={previousSlide}>
+													<AngleLeftSolid />
+												</SliderArrow>
+											)
+										}
+									>
+										{currentItems &&
+											currentItems.map((item) => {
+												if (!(item instanceof ThemeTemplateGroup))
+													return (
+														<ItemContainer
+															onClick={() => {
+																setVisibleClickType('Group');
+																handleAttributeSelection(item.id);
+															}}
+															selected={item.id === lastSelectedItem?.id}
+															key={item.guid}
+														>
+															<ItemName key={item.name}>
+																{' '}
+																{T._d(item.name.toUpperCase())}{' '}
+															</ItemName>
+															{/* <OptionSelectedName>
 															{item.options.find((opt) => opt.selected)
 																? T._d(item.options.find((opt) => opt.selected)!.name)
 																: ''}
 														</OptionSelectedName>
 														<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton> */}
-													</ItemContainer>
-												);
-											else
-												return (
-													<ItemContainer
-														selected={item.templateGroupID === lastSelectedItem?.id}
-														key={item.templateGroupID}
-														onClick={() =>
-															handleTemplateGroupSelection(item.templateGroupID)
-														}
-													>
-														<ItemName key={item.name}>
-															{T._d(item.name.toUpperCase())}
-														</ItemName>
-													</ItemContainer>
-												);
-										})}
-								</CarouselContainer>
-
-								{lastSelectedItem?.type === 'attribute' ? (
-									<>
-										{/* wwqweqewqew */}
-										<OptionsContainer
-											key={'options-container'}
-										//onClick={() => setVisibleClickType('Group')}
-										>
-											<Options key={'option'}>
-												{selectedAttribute &&
-													selectedAttribute.options
-														.filter((x) => x.enabled)
-														.map((option) => (
-															<OptionItem
-																key={option.guid}
-																selectedAttribute={selectedAttribute}
-																option={option}
-																hasDescriptionIcon={selectedAttribute.options.some(
-																	(x) => x.description
-																)}
-															/>
-														))}
-											</Options>
-										</OptionsContainer>
-
-										<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
-										<AttributeDescription>{selectedAttribute?.description}</AttributeDescription>
-									</>
-								) : (
-									<TemplateGroup
-										key={selectedTemplateGroupId}
-										templateGroup={selectedTemplateGroup!}
-									/>
-								)}
-							</>
-						)}
-
-						{selectedGroup?.direction === 1 && (
-							<>
-								{visibleClickType === 'Option' &&
-									currentItems &&
-									currentItems.map((item) => {
-										if (!(item instanceof ThemeTemplateGroup))
-											return (
-												<ItemAccordionContainer key={'container' + item.code}>
-													<ItemAccordion
-														key={item.guid}
-														opened={attributesOpened.get(item.id)}
-														onClick={
-															selectedGroup.attributesAlwaysOpened
-																? () => null
-																: () => handleAttributeSelection(item.id, true)
-														}
-													>
-														<ItemAccordionName>{T._d(item.name)}</ItemAccordionName>
-
-														{!selectedGroup.attributesAlwaysOpened && (
-															<ArrowIcon
-																key={'accordion-icon'}
-																src={
-																	attributesOpened.get(item.id) ? arrowUp : arrowDown
-																}
-															/>
-														)}
-													</ItemAccordion>
-													{item.description !== '' && (
-														<ItemAccordionDescription>
-															{T._d(item.description)}
-														</ItemAccordionDescription>
-													)}
-
-													{/* Enable Disable this component for visibilty */}
-
-													{visibleClickType == 'Option' && attributesOpened.get(item.id) && (
-														<>
-															<OptionsContainer //onClick={() => setVisibleClickType('Group')}
-															>
-																<Options //onClick={() => setVisibleClickType('Group')}
-																>
-																	{item.options
-																		.filter((x) => x.enabled)
-																		.map((option) => (
-																			<OptionItem
-																				key={option.guid}
-																				selectedAttribute={selectedAttribute}
-																				option={option}
-																				hasDescriptionIcon={item.options.some(
-																					(x) => x.description
-																				)}
-																			/>
-																		))}
-																</Options>
-															</OptionsContainer>
-															<OptionApplyButton onClick={() => setVisibleClickType('Group')}>Apply</OptionApplyButton>
-														</>
-
-													)}
-												</ItemAccordionContainer>
-											);
-										else
-											return (
-												<>
-													<ItemAccordionContainer key={'container' + item.templateGroupID}>
-														<ItemAccordion
-															key={item.templateGroupID + 'accordion'}
-															opened={attributesOpened.get(item.templateGroupID)}
+														</ItemContainer>
+													);
+												else
+													return (
+														<ItemContainer
+															selected={item.templateGroupID === lastSelectedItem?.id}
+															key={item.templateGroupID}
 															onClick={() =>
-																handleTemplateGroupSelection(item.templateGroupID, true)
+																handleTemplateGroupSelection(item.templateGroupID)
+															}
+														>
+															<ItemName key={item.name}>
+																{T._d(item.name.toUpperCase())}
+															</ItemName>
+														</ItemContainer>
+													);
+											})}
+									</CarouselContainer>
+
+									{lastSelectedItem?.type === 'attribute' ? (
+										<>
+											{/* wweweqewqew */}
+											
+											<OptionsContainer key={'options-container'}>
+												<Options key={'option'}>
+													{selectedAttribute &&
+														selectedAttribute.options
+															.filter((x) => x.enabled)
+															.map((option) => (
+																<OptionItem
+																	key={option.guid}
+																	selectedAttribute={selectedAttribute}
+																	option={option}
+																	hasDescriptionIcon={selectedAttribute.options.some(
+																		(x) => x.description
+																	)}
+																/>
+															))}
+												</Options>
+
+												{selectedOptionName?.name === 'Custom Zipper' &&
+													selectedAttribute?.name.toLowerCase() === 'zipper style' && (
+														<div>
+															<NewInputTextVertical
+															    className={`input-box ${
+																	selectedOptionName?.name === 'Custom Zipper' &&
+																	selectedAttribute?.name.toLowerCase() === 'zipper style'
+																		? 'show'
+																		: 'hide'
+																}`}
+																value={customTextMessage}
+																onChange={(e) => {
+																	// setCustomTextMessage(e.target.value)
+																	setItemTextNew(e.target.value);
+																}}
+															/>
+														</div>
+													)}
+											</OptionsContainer>
+
+											<ApplyButton onClick={() => setVisibleClickType('Group')}>
+												Apply
+											</ApplyButton>
+											<AttributeDescription>
+												{selectedAttribute?.description}
+											</AttributeDescription>
+										</>
+									) : (
+										<TemplateGroup
+											key={selectedTemplateGroupId}
+											templateGroup={selectedTemplateGroup!}
+										/>
+									)}
+								</>
+							)}
+
+							{selectedGroup?.direction === 1 && (
+								<>
+									{visibleClickType === 'Option' &&
+										currentItems &&
+										currentItems.map((item) => {
+											if (!(item instanceof ThemeTemplateGroup))
+												return (
+													<ItemAccordionContainer key={'container' + item.code}>
+														<ItemAccordion
+															key={item.guid}
+															opened={attributesOpened.get(item.id)}
+															onClick={
+																selectedGroup.attributesAlwaysOpened
+																	? () => null
+																	: () => handleAttributeSelection(item.id, true)
 															}
 														>
 															<ItemAccordionName>{T._d(item.name)}</ItemAccordionName>
@@ -747,40 +775,110 @@ const DesktopRightSidebar = () => {
 																<ArrowIcon
 																	key={'accordion-icon'}
 																	src={
-																		attributesOpened.get(item.templateGroupID)
+																		attributesOpened.get(item.id)
 																			? arrowUp
 																			: arrowDown
 																	}
 																/>
 															)}
 														</ItemAccordion>
-
-														{attributesOpened.get(item.templateGroupID) && (
-															<TemplateGroup
-																key={selectedTemplateGroupId + 'vertical'}
-																templateGroup={selectedTemplateGroup!}
-															/>
+														{item.description !== '' && (
+															<ItemAccordionDescription>
+																{T._d(item.description)}
+															</ItemAccordionDescription>
 														)}
+
+														{/* Enable Disable this component for visibilty */}
+
+														{visibleClickType == 'Option' &&
+															attributesOpened.get(item.id) && (
+																<>
+																	<OptionsContainer //onClick={() => setVisibleClickType('Group')}
+																	>
+																		<Options //onClick={() => setVisibleClickType('Group')}
+																		>
+																			{item.options
+																				.filter((x) => x.enabled)
+																				.map((option) => (
+																					<OptionItem
+																						key={option.guid}
+																						selectedAttribute={
+																							selectedAttribute
+																						}
+																						option={option}
+																						hasDescriptionIcon={item.options.some(
+																							(x) => x.description
+																						)}
+																					/>
+																				))}
+																		</Options>
+																	</OptionsContainer>
+																	<OptionApplyButton
+																		onClick={() => setVisibleClickType('Group')}
+																	>
+																		Apply
+																	</OptionApplyButton>
+																</>
+															)}
 													</ItemAccordionContainer>
-												</>
-											);
-									})}
-							</>
-						)}
-					</>
-				)}
+												);
+											else
+												return (
+													<>
+														<ItemAccordionContainer
+															key={'container' + item.templateGroupID}
+														>
+															<ItemAccordion
+																key={item.templateGroupID + 'accordion'}
+																opened={attributesOpened.get(item.templateGroupID)}
+																onClick={() =>
+																	handleTemplateGroupSelection(
+																		item.templateGroupID,
+																		true
+																	)
+																}
+															>
+																<ItemAccordionName>{T._d(item.name)}</ItemAccordionName>
 
-				{/* Designer / Customizer */}
-				{selectedGroupId === -2 && (
-					<>
-						<Designer />
-						<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
-					</>
-				)}
+																{!selectedGroup.attributesAlwaysOpened && (
+																	<ArrowIcon
+																		key={'accordion-icon'}
+																		src={
+																			attributesOpened.get(item.templateGroupID)
+																				? arrowUp
+																				: arrowDown
+																		}
+																	/>
+																)}
+															</ItemAccordion>
 
-				{/* Saved Compositions */}
-				{draftCompositions && selectedGroupId === -3 && <DesignsDraftList />}
-			</AttributesContainer>}
+															{attributesOpened.get(item.templateGroupID) && (
+																<TemplateGroup
+																	key={selectedTemplateGroupId + 'vertical'}
+																	templateGroup={selectedTemplateGroup!}
+																/>
+															)}
+														</ItemAccordionContainer>
+													</>
+												);
+										})}
+								</>
+							)}
+						</>
+					)}
+
+					{/* Designer / Customizer */}
+					{selectedGroupId === -2 && (
+						<>
+							<Designer />
+							<ApplyButton onClick={() => setVisibleClickType('Group')}>Apply</ApplyButton>
+						</>
+					)}
+
+					{/* Saved Compositions */}
+					{draftCompositions && selectedGroupId === -3 && <DesignsDraftList />}
+				</AttributesContainer>
+			)}
 		</DesktopRightSidebarContainer>
 	);
 };

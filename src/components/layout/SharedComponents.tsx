@@ -170,6 +170,7 @@ export const OptionsContainer = styled.div`
 	min-height: 0;
 	overflow-y: auto;
 	overflow-x: hidden;
+	flex-direction: column;
 `;
 
 export const Options = styled.div`

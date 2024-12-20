@@ -214,6 +214,8 @@ const ItemText: FC<{
 
 		const inputText = value;
 		const formattedText = inputText.split('').join('\n'); // Add a new line after each character
+		console.log(formattedText,'formattedText');
+		
 		handleItemPropChange?.(item, 'text', isUpperCase ? formattedText.toUpperCase() : formattedText);
 	};
 
