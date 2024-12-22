@@ -150,16 +150,16 @@ const OptionApplyButton = styled.div`
 `;
 
 const NewInputTextVertical = styled.input`
-    height: 2em;
+    height: 3em;
 	border-radius: 1%;
 	// border: 0;
 	border-bottom: 2px solid gray;
 	background: white;
-	width: 10em;
+	width: 15em;
     font-size: 20px;
 	position: relative;
-    top: 10em;
-	left: 1em;
+    bottom: -1em;
+	left: 0em;
 	&:focus {
 		outline-width: 0;
 }
