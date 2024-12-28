@@ -2,46 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Links are followed to try on different products
+## 1. https://cale-and-cael-zakeke.vercel.app/?name=Huckleberry+Backpack&modelCode=6914117730384&currency=USD&ecommerce=preview&qty=1&culture=en-US&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU2VsbGVyIiwiUGVybUJpdHMiOiIwMTAwMTExMDAxMTAwMTExMTExMTAxIiwidW5pcXVlX25hbWUiOiJjYWxlLWNhZWwubXlzaG9waWZ5LmNvbS01MTUyYjI4NS03YTJhLTRiYzQtOGE2OC0yNmI3NTYyNjc5ZTUtb2didm55Z2UucDUwIiwiVXNlcklEIjoiMjUwNjY4IiwiVXNlck5hbWUiOiJjYWxlLWNhZWwubXlzaG9waWZ5LmNvbS01MTUyYjI4NS03YTJhLTRiYzQtOGE2OC0yNmI3NTYyNjc5ZTUtb2didm55Z2UucDUwIiwiZW1haWwiOiJjYWxlLWNhZWwubXlzaG9waWZ5LmNvbS1yMXYzbXZzdy5pa29AemFrZWtlLmNvbSIsIlVzZXJUeXBlSUQiOiIzIiwiSXNzdWVEYXRlIjoiMTctMTItMjAyNCAxMC0zNi00MloiLCJVc2VyVmVyc2lvbiI6IjIwMjQxMjE2MTMyNzExIiwiY2xpZW50SUQiOiIyNTExNTciLCJzYWxlc0NoYW5uZWxJRCI6IjEiLCJjdXN0b21lcmNvZGUiOiJjdXN0b21lciIsImFjY2Vzc1R5cGUiOiJTMlMiLCJuYmYiOjE3MzQ0MzE4MDIsImV4cCI6MTczNDUxODIwMiwiaWF0IjoxNzM0NDMxODAyLCJpc3MiOiJ3d3cuemFrZWtlLmNvbSIsImF1ZCI6Imh0dHBzOi8vd3d3Lnpha2VrZS5jb20ifQ.tSq44GybgF1Enm_0azoS2lOVJf6F7OlpPKbPHjKMfIc&fromUrl=1&viewerMode=1&integrationVersion=2
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
+## 2. https://cale-and-cael-zakeke.vercel.app/?name=LeGrand+Duffle+Bag&modelCode=6914118516816&currency=USD&ecommerce=preview&qty=1&culture=en-US&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU2VsbGVyIiwiUGVybUJpdHMiOiIwMTAwMTExMDAxMTAwMTExMTExMTAxIiwidW5pcXVlX25hbWUiOiJjYWxlLWNhZWwubXlzaG9waWZ5LmNvbS01MTUyYjI4NS03YTJhLTRiYzQtOGE2OC0yNmI3NTYyNjc5ZTUtb2didm55Z2UucDUwIiwiVXNlcklEIjoiMjUwNjY4IiwiVXNlck5hbWUiOiJjYWxlLWNhZWwubXlzaG9waWZ5LmNvbS01MTUyYjI4NS03YTJhLTRiYzQtOGE2OC0yNmI3NTYyNjc5ZTUtb2didm55Z2UucDUwIiwiZW1haWwiOiJjYWxlLWNhZWwubXlzaG9waWZ5LmNvbS1yMXYzbXZzdy5pa29AemFrZWtlLmNvbSIsIlVzZXJUeXBlSUQiOiIzIiwiSXNzdWVEYXRlIjoiMjMtMTItMjAyNCAwOS0xNy0wOFoiLCJVc2VyVmVyc2lvbiI6IjIwMjQxMjIzMDkxNzAzIiwiY2xpZW50SUQiOiIyNTExNTciLCJzYWxlc0NoYW5uZWxJRCI6IjEiLCJjdXN0b21lcmNvZGUiOiJjdXN0b21lciIsImFjY2Vzc1R5cGUiOiJTMlMiLCJuYmYiOjE3MzQ5NDU0MjgsImV4cCI6MTczNTAzMTgyOCwiaWF0IjoxNzM0OTQ1NDI4LCJpc3MiOiJ3d3cuemFrZWtlLmNvbSIsImF1ZCI6Imh0dHBzOi8vd3d3Lnpha2VrZS5jb20ifQ.g-i1_qwImZqHh4pwERFtMzupsVzyZLES87Ox10u2Jls&fromUrl=1&viewerMode=1&integrationVersion=2
