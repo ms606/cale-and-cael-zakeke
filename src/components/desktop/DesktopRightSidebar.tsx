@@ -240,7 +240,7 @@ const DesktopRightSidebar = () => {
 		setCustomTextMessage(value);
 
 		if (items) {
-			const guidNo = items.find(({ name }) => name.match(/zip*/));
+			const guidNo = items.find(({ name }) => name.toLowerCase().match(/zip*/));
 			if (guidNo) setItemText(guidNo?.guid, formattedText);
 		}
 	};
