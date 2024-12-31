@@ -719,7 +719,7 @@ const DesktopRightSidebar = () => {
 
 												{selectedOptionName?.name === 'Custom Zipper' &&
 													selectedAttribute?.name.toLowerCase() === 'zipper style' && (
-														<div style={{position: "relative", top: "5px", display: "flex"}}>
+														<div style={{position: "relative", top: "50px", display: "flex"}}>
 															<div style={{position:"relative", bottom:"-1em", padding: "5px"}}>
 															 <Label />																
 															</div>
