@@ -2,7 +2,7 @@ import { Attribute, Step, ThemeTemplateGroup } from '@zakeke/zakeke-configurator
 import { ReactComponent as AngleLeftSolid } from '../../assets/icons/angle-left-solid.svg';
 import { ReactComponent as AngleRightSolid } from '../../assets/icons/angle-right-solid.svg';
 import { ReactComponent as TickButton } from '../../assets/icons/tick-button.svg';
-
+import { ReactComponent as Label} from '../../assets/icons/label-svgrepo-com.svg';
 import textIcon from '../../assets/icons/font-solid.svg';
 import savedCompositionsIcon from '../../assets/icons/saved_designs.svg';
 import star from '../../assets/icons/star.svg';
@@ -150,12 +150,13 @@ const OptionApplyButton = styled.div`
 `;
 
 const NewInputTextVertical = styled.input`
-    height: 3em;
-	border-radius: 1%;
+    height: 2em;
+	border-radius: 10px;
+	margin-left: 8px;
 	// border: 0;
 	border-bottom: 2px solid gray;
 	background: white;
-	width: 15em;
+	width: 10em;
     font-size: 20px;
 	position: relative;
     bottom: -1em;
@@ -698,7 +699,7 @@ const DesktopRightSidebar = () => {
 									{lastSelectedItem?.type === 'attribute' ? (
 										<>
 											{/* wweweqewqew */}
-											
+
 											<OptionsContainer key={'options-container'}>
 												<Options key={'option'}>
 													{selectedAttribute &&
@@ -718,11 +719,17 @@ const DesktopRightSidebar = () => {
 
 												{selectedOptionName?.name === 'Custom Zipper' &&
 													selectedAttribute?.name.toLowerCase() === 'zipper style' && (
-														<div>
+														<div style={{position: "relative", top: "5px", display: "flex"}}>
+															<div style={{position:"relative", bottom:"-1em", padding: "5px"}}>
+															 <Label />																
+															</div>
+
 															<NewInputTextVertical
-															    className={`input-box ${
+																placeholder='Enter label'
+																className={`input-box ${
 																	selectedOptionName?.name === 'Custom Zipper' &&
-																	selectedAttribute?.name.toLowerCase() === 'zipper style'
+																	selectedAttribute?.name.toLowerCase() ===
+																		'zipper style'
 																		? 'show'
 																		: 'hide'
 																}`}
