@@ -168,6 +168,14 @@ const NewInputTextVertical = styled.input`
 		
 `;
 
+const ZipperStyleTextLabel = styled.div`
+@media (max-width: 1147px) {
+	top: 32px !important;
+}
+`
+  
+
+
 // This is the right sidebar component for the desktop layout
 // that contains the list of groups, steps, attributes and options.
 const DesktopRightSidebar = () => {
@@ -719,7 +727,7 @@ const DesktopRightSidebar = () => {
 
 												{selectedOptionName?.name === 'Custom Zipper' &&
 													selectedAttribute?.name.toLowerCase() === 'zipper style' && (
-														<div style={{position: "relative", top: "50px", display: "flex"}}>
+														<ZipperStyleTextLabel className='ZipperStyleTextLabel' style={{position: "relative", top: "50px", display: "flex"}}>
 															<div style={{position:"relative", bottom:"-1em", padding: "5px"}}>
 															 <Label />																
 															</div>
@@ -739,7 +747,7 @@ const DesktopRightSidebar = () => {
 																	setItemTextNew(e.target.value);
 																}}
 															/>
-														</div>
+														</ZipperStyleTextLabel>
 													)}
 											</OptionsContainer>
 
