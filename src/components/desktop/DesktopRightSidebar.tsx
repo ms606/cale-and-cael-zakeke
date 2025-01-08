@@ -2,7 +2,7 @@ import { Attribute, Step, ThemeTemplateGroup } from '@zakeke/zakeke-configurator
 import { ReactComponent as AngleLeftSolid } from '../../assets/icons/angle-left-solid.svg';
 import { ReactComponent as AngleRightSolid } from '../../assets/icons/angle-right-solid.svg';
 import { ReactComponent as TickButton } from '../../assets/icons/tick-button.svg';
-import { ReactComponent as Label} from '../../assets/icons/label-svgrepo-com.svg';
+import { ReactComponent as Label } from '../../assets/icons/tags.svg';
 import textIcon from '../../assets/icons/font-solid.svg';
 import savedCompositionsIcon from '../../assets/icons/saved_designs.svg';
 import star from '../../assets/icons/star.svg';
@@ -150,17 +150,24 @@ const OptionApplyButton = styled.div`
 `;
 
 const NewInputTextVertical = styled.input`
-    height: 2em;
-	border-radius: 10px;
+    height: 60px;
+	border-radius: 5px;
 	margin-left: 8px;
 	// border: 0;
-	border-bottom: 2px solid gray;
+	border: 1px solid #C7C7C7;
+	font-family: Poppins;
+	color: #C7C7C7;
 	background: white;
-	width: 10em;
+	width: 370px;
     font-size: 20px;
 	position: relative;
-    bottom: -1em;
+    // bottom: -1em;
 	left: 0em;
+	&::placeholder {
+		font-size: 15px;
+		font-family: Poppins;
+		color: #C7C7C7;
+	}
 	&:focus {
 		outline-width: 0;
 }
@@ -169,12 +176,10 @@ const NewInputTextVertical = styled.input`
 `;
 
 const ZipperStyleTextLabel = styled.div`
-@media (max-width: 1147px) {
-	top: 32px !important;
-}
-`
-  
-
+	@media (max-width: 1147px) {
+		top: 32px !important;
+	}
+`;
 
 // This is the right sidebar component for the desktop layout
 // that contains the list of groups, steps, attributes and options.
@@ -727,27 +732,53 @@ const DesktopRightSidebar = () => {
 
 												{selectedOptionName?.name === 'Custom Zipper' &&
 													selectedAttribute?.name.toLowerCase() === 'zipper style' && (
-														<ZipperStyleTextLabel className='ZipperStyleTextLabel' style={{position: "relative", top: "50px", display: "flex"}}>
-															<div style={{position:"relative", bottom:"-1em", padding: "5px"}}>
-															 <Label />																
-															</div>
-
-															<NewInputTextVertical
-																placeholder='Enter label'
-																className={`input-box ${
-																	selectedOptionName?.name === 'Custom Zipper' &&
-																	selectedAttribute?.name.toLowerCase() ===
-																		'zipper style'
-																		? 'show'
-																		: 'hide'
-																}`}
-																value={customTextMessage}
-																onChange={(e) => {
-																	// setCustomTextMessage(e.target.value)
-																	setItemTextNew(e.target.value);
+														<div>
+															<ZipperStyleTextLabel
+																className='ZipperStyleTextLabel'
+																style={{
+																	position: 'relative',
+																	top: '50px',
+																	display: 'flex',
+																	alignItems: 'center',
+																	justifyContent: 'center',
+																	flexDirection: 'column'
 																}}
-															/>
-														</ZipperStyleTextLabel>
+															>
+																<div className="zipper-custom-input-title">Zipper Custom</div>
+																<div>
+																	<div
+																		style={{
+																			position: 'absolute',
+																			top: '2.5em',
+																			right: '10px',
+																			padding: '5px',
+																			zIndex: '2'
+																		}}
+																	>
+																		<Label />
+																	</div>
+
+																	<NewInputTextVertical
+																		placeholder=' Enter label'
+																		className={`input-box ${
+																			selectedOptionName?.name ===
+																				'Custom Zipper' &&
+																			selectedAttribute?.name.toLowerCase() ===
+																				'zipper style'
+																				? 'show'
+																				: 'hide'
+																		}`}
+																		value={customTextMessage}
+																		onChange={(e) => {
+																			// setCustomTextMessage(e.target.value)
+																			if (e.target.value.length < 7)
+																				setItemTextNew(e.target.value);
+																			console.log(e.target.value.length);
+																		}}
+																	/>
+																</div>
+															</ZipperStyleTextLabel>
+														</div>
 													)}
 											</OptionsContainer>
 
