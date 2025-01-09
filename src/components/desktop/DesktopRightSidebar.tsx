@@ -152,8 +152,6 @@ const OptionApplyButton = styled.div`
 const NewInputTextVertical = styled.input`
     height: 60px;
 	border-radius: 5px;
-	margin-left: 8px;
-	// border: 0;
 	border: 1px solid #C7C7C7;
 	font-family: Poppins;
 	color: #C7C7C7;
@@ -176,6 +174,8 @@ const NewInputTextVertical = styled.input`
 `;
 
 const ZipperStyleTextLabel = styled.div`
+	padding-left: 10px;
+	 
 	@media (max-width: 1147px) {
 		top: 32px !important;
 	}
@@ -744,12 +744,12 @@ const DesktopRightSidebar = () => {
 																	flexDirection: 'column'
 																}}
 															>
-																<div className="zipper-custom-input-title">Zipper Custom</div>
+																<div className="zipper-custom-input-title">ZIPPER CUSTOM</div>
 																<div>
 																	<div
 																		style={{
 																			position: 'absolute',
-																			top: '2.5em',
+																			top: '3em',
 																			right: '10px',
 																			padding: '5px',
 																			zIndex: '2'
@@ -776,6 +776,8 @@ const DesktopRightSidebar = () => {
 																			console.log(e.target.value.length);
 																		}}
 																	/>
+																	<div className="zipper-custom-sub-input-title">(Max 6 character)</div>
+																	
 																</div>
 															</ZipperStyleTextLabel>
 														</div>
