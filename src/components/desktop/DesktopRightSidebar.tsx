@@ -32,17 +32,14 @@ import {
 	GroupsContainer,
 	Options,
 	OptionsContainer,
-	OptionSelectedName,
 	ItemAccordionDescription
 } from '../layout/SharedComponents';
 import Steps from '../layout/Steps';
 import TemplateGroup from 'components/TemplateGroup';
-import ItemText from 'components/widgets/ItemText';
 
 export const DesktopRightSidebarContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	// flex-flow: row;
 	justify-content: flex-start;
 	min-height: 0;
 
@@ -112,19 +109,6 @@ const ApplyButton = styled.div`
 	background: black;
 	color: white;
 	border-radius: 6%;
-
-	// border: 1px solid;
-	// box-shadow: 3px 3px;
-	// width: 121px;
-	// padding: 8px;
-	// display: flex;
-	// justify-content: center;
-	// align-item: center;
-	// text-align: center;
-	// cursor: pointer;
-	// position: absolute;
-	// bottom: 5em;
-	// right: 16px;
 `;
 
 const OptionApplyButton = styled.div`
@@ -191,7 +175,6 @@ const DesktopRightSidebar = () => {
 		setTemplate,
 		draftCompositions,
 		setItemText,
-		addItemText,
 		items
 	} = useZakeke();
 
@@ -772,7 +755,6 @@ const DesktopRightSidebar = () => {
 																			// setCustomTextMessage(e.target.value)
 																			if (e.target.value.length < 7)
 																				setItemTextNew(e.target.value);
-																			console.log(e.target.value.length);
 																		}}
 																	/>
 																	<div className="zipper-custom-sub-input-title">(Max 6 character)</div>
