@@ -247,8 +247,6 @@ const DesktopRightSidebar = () => {
 
 	const [visibleClickType, setVisibleClickType] = useState<string>('Group');
 
-	// const [lastSelectedItem, setLastSelectedItem] = useState<{ type: string; id: number }>();
-
 	const undoRegistering = useUndoRegister();
 	const undoRedoActions = useUndoRedoActions();
 	const groupIndex = actualGroups && selectedGroup ? actualGroups.indexOf(selectedGroup) : 0;
@@ -296,7 +294,6 @@ const DesktopRightSidebar = () => {
 			});
 		}
 		setSelectedGroupId(groupId);
-		// setVisibleClickType('Option');
 	};
 
 	const handleStepSelection = (stepId: number | null) => {
@@ -574,7 +571,7 @@ const DesktopRightSidebar = () => {
 											setVisibleClickType('Option');
 										}}
 									>
-										<OptionSelectionDiv> {/* <TickButton />{' '} */}</OptionSelectionDiv>
+										<OptionSelectionDiv></OptionSelectionDiv>
 
 										<GroupNameTitle>
 											<>{group.name ? T._d(group.name) : T._('Customize', 'Composer')}</>
@@ -822,10 +819,8 @@ const DesktopRightSidebar = () => {
 														{visibleClickType == 'Option' &&
 															attributesOpened.get(item.id) && (
 																<>
-																	<OptionsContainer //onClick={() => setVisibleClickType('Group')}
-																	>
-																		<Options //onClick={() => setVisibleClickType('Group')}
-																		>
+																	<OptionsContainer>
+																		<Options>
 																			{item.options
 																				.filter((x) => x.enabled)
 																				.map((option) => (

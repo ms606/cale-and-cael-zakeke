@@ -198,7 +198,6 @@ const Designer: FC<{ onCloseClick?: () => void }> = ({ onCloseClick }) => {
 
 	const filteredAreas = product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
 	let finalVisibleAreas: ProductArea[] = [];
-console.log(filteredAreas,'filteredAreas');
 
 	const [moveElements, setMoveElements] = useState(false);
 
