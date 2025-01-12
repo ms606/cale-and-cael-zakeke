@@ -1,7 +1,6 @@
 import { Attribute, Step, ThemeTemplateGroup } from '@zakeke/zakeke-configurator-react';
 import { ReactComponent as AngleLeftSolid } from '../../assets/icons/angle-left-solid.svg';
 import { ReactComponent as AngleRightSolid } from '../../assets/icons/angle-right-solid.svg';
-import { ReactComponent as TickButton } from '../../assets/icons/tick-button.svg';
 import { ReactComponent as Label } from '../../assets/icons/tags.svg';
 import textIcon from '../../assets/icons/font-solid.svg';
 import savedCompositionsIcon from '../../assets/icons/saved_designs.svg';
