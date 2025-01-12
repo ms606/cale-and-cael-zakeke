@@ -153,7 +153,7 @@ function App() {
 		if (product && !isSceneLoading) {
 			const personalizedMessage = personalizedMessages?.find((message) => message.eventID === 3);
 			const welcomeMessage = eventMessages?.find((message) => message.eventID === 3 && message.isDefault);
-			console.log(eventMessages);
+			
 			if ((personalizedMessage && personalizedMessage.visible) || (welcomeMessage && welcomeMessage.visible))
 				showDialog(
 					'WelcomeMessage',

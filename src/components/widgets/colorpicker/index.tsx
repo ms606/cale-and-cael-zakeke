@@ -147,8 +147,7 @@ const ColorPickerDropdown: FC<{ color: string, onChange: (color: string) => void
 
     useEffect(() => {
         if (!preventChange) {
-            console.log('rgb changed');
-
+           
             const rbgNewColor = {
                 r: valueToColor(r),
                 g: valueToColor(g),
