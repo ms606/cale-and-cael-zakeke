@@ -287,7 +287,7 @@ const MobileMenu = () => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isStartRegistering]);
-	// console.log('currentItems', currentItems)
+	
 	return (
 		<MobileMenuContainer>
 			{sellerSettings && sellerSettings.priceInfoText && (

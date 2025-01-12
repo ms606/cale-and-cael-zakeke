@@ -98,7 +98,7 @@ const TryOnsButton: FC<TryOnComponentProps> = (props: TryOnComponentProps) => {
 
 	if (props.settings.styleButton === 'single') {
 		const button = props.settings.buttonCustomizations[0];
-		console.log(button.borderWidth);
+		
 		buttons = (
 			<TryOnButtonElement onClick={() => handleClick(TryOnMode.TryOn)} customization={button}>
 				{button.image && button.image === 'base' ? (

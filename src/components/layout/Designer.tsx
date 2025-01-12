@@ -328,8 +328,6 @@ const Designer: FC<{ onCloseClick?: () => void }> = ({ onCloseClick }) => {
 			<AddTextDialog
 				onClose={() => closeDialog('add-text')}
 				onConfirm={(item) => {
-					console.log(item,'check this');
-					
 					addItemText(item, actualAreaId);
 					closeDialog('add-text');
 				}}
