@@ -750,11 +750,11 @@ const DesktopRightSidebar = () => {
 																		value={customTextMessage}
 																		onChange={(e) => {
 																			// setCustomTextMessage(e.target.value)
-																			if (e.target.value.length < 7)
+																			if (e.target.value.length < 6)
 																				setItemTextNew(e.target.value);
 																		}}
 																	/>
-																	<div className="zipper-custom-sub-input-title">(Max 6 character)</div>
+																	<div className="zipper-custom-sub-input-title">(Max 5 character)</div>
 																	
 																</div>
 															</ZipperStyleTextLabel>
